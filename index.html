@@ -872,7 +872,13 @@ footer {
           <span id="themeIcon">🌙</span>
         </button>
         <span class="btn btn-secondary btn-sm nav-cta-desktop" onclick="navigate('pricing')" style="cursor:pointer">Log In</span>
-        <span class="btn btn-accent btn-sm nav-cta-desktop" onclick="openSignup('Free Trial')" style="cursor:pointer">Start Free</span>
+       <span 
+  class="btn btn-accent btn-sm nav-cta-desktop" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')" 
+  style="cursor:pointer"
+>
+  Start Free
+</span>
         <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false" id="hamburgerBtn">
           <span></span><span></span><span></span>
         </button>
@@ -891,7 +897,13 @@ footer {
   <div class="mobile-nav-link" onclick="navigate('about');toggleMobileNav()">About</div>
   <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
     <span class="btn btn-secondary" onclick="openSignup('Free Trial');toggleMobileNav()" style="cursor:pointer;flex:1;justify-content:center">Log In</span>
-    <span class="btn btn-accent" onclick="openSignup('Free Trial');toggleMobileNav()" style="cursor:pointer;flex:1;justify-content:center">Start Free Trial</span>
+   <span 
+  class="btn btn-accent btn-sm nav-cta-desktop" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')" 
+  style="cursor:pointer"
+>
+  Start Free
+</span>
   </div>
 </div>
 
@@ -921,9 +933,12 @@ footer {
             Arogya Labs builds AI-native tools that eliminate documentation burden, accelerate diagnosis, and put physicians back in control of care — not paperwork.
           </p>
           <div class="hero-actions">
-            <button class="btn btn-accent btn-lg" onclick="openSignup('Free Trial')">
-              Start Free Trial →
-            </button>
+            <button 
+  class="btn btn-accent btn-lg" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free Trial →
+</button>
             <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">
               Watch Demo
             </button>
@@ -1191,8 +1206,13 @@ footer {
       <h2 class="display-2">Give physicians time back.<br>Start your free trial.</h2>
       <p class="body-lg">No credit card. No long-term contracts. 30-day full access to all features.</p>
       <div class="cta-actions">
-        <button class="btn btn-accent btn-lg" onclick="openSignup('Free Trial')">Start Free Trial — It's Free</button>
-        <button class="btn btn-ghost btn-lg" onclick="openSignup('Demo')">Schedule a Demo</button>
+<button 
+  class="btn btn-accent btn-lg" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free Trial — It's Free
+</button>        
+<button class="btn btn-ghost btn-lg" onclick="openSignup('Demo')">Schedule a Demo</button>
       </div>
     </div>
   </section>
@@ -1213,7 +1233,12 @@ footer {
           Arogya Scribe listens to your patient visit — ambient, hands-free — and generates structured SOAP notes automatically. All in under 2 minutes.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-accent btn-lg" onclick="openSignup('Scribe Free Trial')">Start Free 30-Day Trial</button>
+          <button 
+  class="btn btn-accent btn-lg" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free 30-Day Trial
+</button>
           <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">See Demo Video</button>
         </div>
         <div class="hero-trust" style="margin-top:32px;">
@@ -1354,7 +1379,12 @@ footer {
           Arogya Radiologist applies deep learning to X-rays, CTs, and MRIs — surfacing findings in minutes, auto-generating structured reports, and alerting on critical results before they're missed.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-accent btn-lg" onclick="openSignup('Radiology Access')">Request Early Access</button>
+<button 
+  class="btn btn-accent btn-lg" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Request Early Access
+</button>
           <button class="btn btn-ghost btn-lg" onclick="openSignup('Radiology Demo')">Schedule Demo</button>
         </div>
       </div>
@@ -1501,8 +1531,13 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> Manual EHR copy-paste</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Email support</div>
           </div>
-          <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="openSignup('Starter')">Start Free</button>
-        </div>
+<button 
+  class="btn btn-secondary" 
+  style="width:100%;justify-content:center;"
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free
+</button>        </div>
 
         <!-- Pro - Featured -->
         <div class="pricing-card featured">
@@ -1523,8 +1558,13 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> Mobile app (iOS & Android)</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Priority support</div>
           </div>
-          <button class="btn btn-accent" style="width:100%;justify-content:center;font-size:1rem;" onclick="openSignup('Pro')">Start 30-Day Free Trial</button>
-          <p style="color:rgba(255,255,255,.5);font-size:.75rem;text-align:center;margin-top:10px;">No credit card required</p>
+<button 
+  class="btn btn-accent" 
+  style="width:100%;justify-content:center;font-size:1rem;"
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start 30-Day Free Trial
+</button>          <p style="color:rgba(255,255,255,.5);font-size:.75rem;text-align:center;margin-top:10px;">No credit card required</p>
         </div>
 
         <!-- Practice -->
@@ -1545,7 +1585,13 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated onboarding specialist</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> SLA-backed support</div>
           </div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openSignup('Practice')">Start Free Trial</button>
+         <button 
+  class="btn btn-primary" 
+  style="width:100%;justify-content:center;"
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free Trial
+</button>
         </div>
       </div>
 
@@ -1556,7 +1602,12 @@ footer {
           <h3 class="heading-3">Need 25+ physicians, custom integrations, or on-prem deployment?</h3>
           <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Custom pricing with volume discounts, dedicated infrastructure, BAA, and a named CSM.</p>
         </div>
-        <button class="btn btn-primary" onclick="openSignup('Enterprise')">Contact Sales →</button>
+   <button 
+  class="btn btn-primary" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Contact Sales →
+</button>
       </div>
     </div>
   </section>
@@ -1579,7 +1630,7 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> PDF report export</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Basic alerting</div>
           </div>
-          <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Starter')">Start Free</button>
+                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')">Start Free</button>
         </div>
         <div class="pricing-card featured">
           <span class="pricing-badge">Most Popular</span>
@@ -1598,8 +1649,13 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> PACS integration</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Longitudinal comparison</div>
           </div>
-          <button class="btn btn-accent" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Pro')">Request Access</button>
-        </div>
+<button 
+  class="btn btn-accent" 
+  style="width:100%;justify-content:center;" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Request Access
+</button>        </div>
         <div class="pricing-card">
           <div class="pricing-name">Department</div>
           <div class="pricing-desc">For hospital radiology departments</div>
@@ -1615,7 +1671,13 @@ footer {
             <div class="pricing-feature"><span class="pricing-check">✓</span> Custom AI model fine-tuning</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated Rad AI specialist</div>
           </div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Department')">Contact Sales</button>
+          <button 
+  class="btn btn-primary" 
+  style="width:100%;justify-content:center;" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Contact Sales
+</button>
         </div>
       </div>
     </div>
@@ -1635,8 +1697,12 @@ footer {
         <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">👤</div><h4>Named CSM</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Dedicated Customer Success Manager and implementation team.</p></div>
         <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">📈</div><h4>Volume Pricing</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Significant per-seat discounts at 50+, 200+, and 1000+ physicians.</p></div>
       </div>
-      <button class="btn btn-accent btn-lg" onclick="openSignup('Enterprise')">Talk to Enterprise Sales →</button>
-    </div>
+<button 
+  class="btn btn-accent btn-lg" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Talk to Enterprise Sales →
+</button>    </div>
   </section>
 
   <!-- FAQ -->
