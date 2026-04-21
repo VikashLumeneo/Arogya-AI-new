@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arogya Labs — AI Clinical Intelligence Platform</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS & THEMING SYSTEM
+   ============================================================ */
+:root {
+  /* Brand Colors */
+  --brand-dark:      #122056;
+  --brand-royal:     #5B65DD;
+  --brand-ice:       #EFF0FB;
+  --brand-accent:    #3D9BE9;   /* Augmented: sky-blue accent for CTAs */
+  --brand-teal:      #0DBFAD;   /* Augmented: teal for success/health data */
+
+  /* Light Theme */
+  --bg-primary:      #FFFFFF;
+  --bg-secondary:    #F7F8FD;
+  --bg-tertiary:     #EFF0FB;
+  --bg-card:         #FFFFFF;
+  --bg-card-hover:   #F3F4FD;
+  --bg-nav:          rgba(255,255,255,0.92);
+  --bg-hero:         #122056;
+
+  --text-primary:    #0D1530;
+  --text-secondary:  #4A5578;
+  --text-muted:      #8892AD;
+  --text-inverse:    #FFFFFF;
+  --text-accent:     #5B65DD;
+
+  --border-color:    #DDE0F0;
+  --border-focus:    #5B65DD;
+
+  --btn-primary-bg:  #122056;
+  --btn-primary-fg:  #FFFFFF;
+  --btn-primary-hover: #1a2f78;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-fg: #122056;
+  --btn-secondary-border: #122056;
+  --btn-accent-bg:   #5B65DD;
+  --btn-accent-fg:   #FFFFFF;
+  --btn-accent-hover: #4854c9;
+
+  --shadow-sm:  0 1px 3px rgba(18,32,86,.06), 0 1px 2px rgba(18,32,86,.04);
+  --shadow-md:  0 4px 16px rgba(18,32,86,.10), 0 2px 6px rgba(18,32,86,.06);
+  --shadow-lg:  0 12px 40px rgba(18,32,86,.14), 0 4px 12px rgba(18,32,86,.08);
+  --shadow-xl:  0 24px 60px rgba(18,32,86,.18);
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+  --radius-pill: 100px;
+}
+
+[data-theme="dark"] {
+  --bg-primary:    #080E22;
+  --bg-secondary:  #0E1830;
+  --bg-tertiary:   #141F3E;
+  --bg-card:       #111828;
+  --bg-card-hover: #192040;
+  --bg-nav:        rgba(8,14,34,0.94);
+  --bg-hero:       #060C1C;
+
+  --text-primary:   #E8EBF8;
+  --text-secondary: #9BA5C7;
+  --text-muted:     #5C6A8E;
+  --text-inverse:   #0D1530;
+  --text-accent:    #818AEF;
+
+  --border-color:   #1E2B4A;
+  --border-focus:   #818AEF;
+
+  --btn-primary-bg:  #5B65DD;
+  --btn-primary-fg:  #FFFFFF;
+  --btn-primary-hover: #4854c9;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-fg: #E8EBF8;
+  --btn-secondary-border: #3A4567;
+  --btn-accent-bg:   #3D9BE9;
+  --btn-accent-fg:   #FFFFFF;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.4);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.5);
+  --shadow-xl:  0 24px 60px rgba(0,0,0,.6);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Mulish', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background .3s, color .3s;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ============================================================
+   TYPOGRAPHY SCALE
+   ============================================================ */
+.display-1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 900; line-height: 1.08; letter-spacing: -.03em; }
+.display-2 { font-size: clamp(2rem, 4.5vw, 3.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -.025em; }
+.heading-1  { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 700; line-height: 1.2; }
+.heading-2  { font-size: clamp(1.25rem, 2.5vw, 1.8rem); font-weight: 700; line-height: 1.3; }
+.heading-3  { font-size: 1.2rem; font-weight: 700; line-height: 1.35; }
+.body-lg    { font-size: 1.125rem; font-weight: 400; line-height: 1.7; }
+.body-md    { font-size: 1rem; font-weight: 400; line-height: 1.65; }
+.body-sm    { font-size: .875rem; font-weight: 400; line-height: 1.6; }
+.label      { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+.container   { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.section     { padding: 96px 0; }
+.section-sm  { padding: 64px 0; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+
+.flex       { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-gap   { display: flex; align-items: center; gap: 12px; }
+.gap-8  { gap: 8px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.gap-32 { gap: 32px; }
+
+.text-center { text-align: center; }
+.mt-8   { margin-top: 8px; }
+.mt-16  { margin-top: 16px; }
+.mt-24  { margin-top: 24px; }
+.mt-32  { margin-top: 32px; }
+.mt-48  { margin-top: 48px; }
+.mb-8   { margin-bottom: 8px; }
+.mb-16  { margin-bottom: 16px; }
+.mb-24  { margin-bottom: 24px; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px; border-radius: var(--radius-pill);
+  font-family: 'Mulish', sans-serif; font-size: .9375rem; font-weight: 700;
+  cursor: pointer; border: 2px solid transparent;
+  transition: all .22s ease; white-space: nowrap; position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0); transition: background .2s;
+}
+.btn:hover::after { background: rgba(255,255,255,0.08); }
+.btn:focus-visible { outline: 3px solid var(--border-focus); outline-offset: 3px; }
+
+.btn-primary {
+  background: var(--btn-primary-bg); color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-bg);
+}
+.btn-primary:hover { background: var(--btn-primary-hover); border-color: var(--btn-primary-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.btn-accent {
+  background: var(--btn-accent-bg); color: var(--btn-accent-fg);
+  border-color: var(--btn-accent-bg);
+}
+.btn-accent:hover { background: var(--btn-accent-hover); border-color: var(--btn-accent-hover); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(91,101,221,.4); }
+
+.btn-secondary {
+  background: var(--btn-secondary-bg); color: var(--btn-secondary-fg);
+  border-color: var(--btn-secondary-border);
+}
+.btn-secondary:hover { background: var(--bg-tertiary); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent; color: var(--text-inverse);
+  border-color: rgba(255,255,255,.4);
+}
+.btn-ghost:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.7); }
+
+.btn-lg { padding: 16px 36px; font-size: 1.0625rem; }
+.btn-sm { padding: 8px 20px; font-size: .8125rem; }
+.btn-icon { width: 42px; height: 42px; padding: 0; border-radius: 50%; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-color);
+  transition: all .3s;
+}
+.nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+/* Logo */
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-royal) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: .95rem; letter-spacing: -.02em;
+  flex-shrink: 0;
+}
+.nav-logo-text { font-weight: 800; font-size: 1.1rem; color: var(--text-primary); }
+.nav-logo-text span { color: var(--brand-royal); }
+
+/* Nav Links */
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: .9rem; color: var(--text-secondary);
+  transition: all .18s; cursor: pointer; position: relative;
+}
+.nav-link:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+.nav-link.active { color: var(--brand-royal); }
+.nav-link.active::after {
+  content: ''; position: absolute; bottom: 2px; left: 14px; right: 14px;
+  height: 2px; background: var(--brand-royal); border-radius: 2px;
+}
+
+/* Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 8px; min-width: 220px;
+  box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none;
+  transition: all .2s; transform-origin: top center;
+  transform: translateX(-50%) translateY(-8px) scale(.97);
+}
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0) scale(1);
+}
+.nav-dropdown-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  font-size: .875rem; font-weight: 600; color: var(--text-secondary);
+  cursor: pointer; transition: all .15s;
+}
+.nav-dropdown-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+.nav-dropdown-icon {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+
+/* Nav right */
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border-color);
+  background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 1rem; transition: all .2s;
+  color: var(--text-secondary);
+}
+.theme-toggle:hover { background: var(--bg-tertiary); color: var(--text-primary); transform: rotate(20deg); }
+
+/* Mobile nav */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  width: 40px; height: 40px; align-items: center; justify-content: center;
+  cursor: pointer; border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm); background: var(--bg-secondary);
+}
+.nav-hamburger span { width: 20px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all .3s; }
+
+.mobile-nav {
+  display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+  background: var(--bg-primary); z-index: 999; padding: 24px;
+  flex-direction: column; gap: 8px; overflow-y: auto;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav-link {
+  padding: 14px 16px; border-radius: var(--radius-sm);
+  font-weight: 700; font-size: 1.1rem; color: var(--text-primary);
+  cursor: pointer; border-bottom: 1px solid var(--border-color);
+}
+.mobile-nav-link:hover { background: var(--bg-tertiary); }
+
+/* ============================================================
+   PAGES (single-page routing)
+   ============================================================ */
+.page { display: none; padding-top: 72px; }
+.page.active { display: block; }
+
+/* ============================================================
+   HERO SECTIONS
+   ============================================================ */
+.hero {
+  background: var(--brand-dark);
+  position: relative; overflow: hidden;
+  min-height: 86vh; display: flex; align-items: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 110% 50%, rgba(91,101,221,.35) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at -10% 80%, rgba(61,155,233,.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(91,101,221,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,101,221,.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 1; padding: 100px 0 80px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(91,101,221,.2); border: 1px solid rgba(91,101,221,.4);
+  color: #A5ABEF; padding: 6px 14px; border-radius: var(--radius-pill);
+  font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand-teal); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.3)} }
+
+.hero h1 { color: #FFFFFF; }
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, #A5ABEF 0%, #5B65DD 40%, var(--brand-teal) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { color: rgba(255,255,255,.72); margin-top: 20px; max-width: 580px; }
+.hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+.hero-trust { display: flex; align-items: center; gap: 20px; margin-top: 48px; flex-wrap: wrap; }
+.hero-trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.55); font-size: .8125rem; font-weight: 600; }
+.hero-trust-icon { color: var(--brand-teal); }
+
+/* Hero right panel */
+.hero-visual {
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius-xl); padding: 28px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 32px 80px rgba(0,0,0,.4);
+}
+.hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+
+/* Demo card */
+.demo-card {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
+}
+.demo-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.demo-dot { width: 8px; height: 8px; border-radius: 50%; }
+.demo-dot.red { background: #FF5F57; }
+.demo-dot.yellow { background: #FFBD2E; }
+.demo-dot.green { background: var(--brand-teal); }
+.demo-label { color: rgba(255,255,255,.4); font-size: .75rem; font-weight: 600; margin-left: auto; }
+.demo-content { color: rgba(255,255,255,.8); font-size: .8125rem; line-height: 1.6; }
+.demo-tag {
+  display: inline-block; background: rgba(91,101,221,.25);
+  border: 1px solid rgba(91,101,221,.4); color: #A5ABEF;
+  border-radius: 4px; padding: 1px 7px; font-size: .7rem; font-weight: 700;
+  margin-right: 4px;
+}
+.demo-stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+.demo-stat {
+  background: rgba(13,191,173,.08); border: 1px solid rgba(13,191,173,.2);
+  border-radius: 8px; padding: 10px; text-align: center;
+}
+.demo-stat-num { font-size: 1.25rem; font-weight: 900; color: var(--brand-teal); line-height: 1; }
+.demo-stat-label { font-size: .65rem; color: rgba(255,255,255,.5); margin-top: 3px; font-weight: 600; }
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--brand-ice); color: var(--brand-royal);
+  padding: 5px 14px; border-radius: var(--radius-pill);
+  font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .section-eyebrow {
+  background: rgba(91,101,221,.15); color: #818AEF;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 32px;
+  transition: all .25s; position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--brand-royal); box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.card-icon {
+  width: 52px; height: 52px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 20px;
+  background: var(--brand-ice);
+}
+[data-theme="dark"] .card-icon { background: rgba(91,101,221,.15); }
+.card h3 { margin-bottom: 10px; }
+.card p { color: var(--text-secondary); }
+
+.card-featured {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, #1E2F7A 100%);
+  border-color: rgba(91,101,221,.3); color: white;
+}
+.card-featured p { color: rgba(255,255,255,.7); }
+.card-featured .card-icon { background: rgba(91,101,221,.25); }
+
+/* Product card */
+.product-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl); overflow: hidden;
+  transition: all .3s; cursor: pointer;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); border-color: var(--brand-royal); }
+.product-card-header { padding: 36px 36px 28px; }
+.product-card-body { padding: 0 36px 36px; }
+.product-badge {
+  display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill);
+  font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.badge-live { background: rgba(13,191,173,.12); color: var(--brand-teal); border: 1px solid rgba(13,191,173,.3); }
+.badge-soon { background: rgba(91,101,221,.12); color: var(--brand-royal); border: 1px solid rgba(91,101,221,.3); }
+[data-theme="dark"] .badge-live { background: rgba(13,191,173,.15); }
+[data-theme="dark"] .badge-soon { background: rgba(91,101,221,.15); color: #818AEF; }
+
+/* Feature list */
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.feature-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .9rem; color: var(--text-secondary);
+}
+.feature-list li::before {
+  content: '✓'; color: var(--brand-teal); font-weight: 800;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ============================================================
+   STATS STRIP
+   ============================================================ */
+.stats-strip { background: var(--brand-dark); padding: 64px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.stat-num { font-size: 2.8rem; font-weight: 900; color: var(--brand-teal); line-height: 1; }
+.stat-label { color: rgba(255,255,255,.6); font-size: .875rem; margin-top: 6px; font-weight: 600; }
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+.pricing-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl); padding: 36px; transition: all .25s;
+}
+.pricing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.pricing-card.featured {
+  background: linear-gradient(160deg, var(--brand-dark) 0%, #1E2B6A 100%);
+  border-color: var(--brand-royal); color: white;
+  transform: scale(1.03);
+  box-shadow: 0 20px 60px rgba(91,101,221,.3);
+}
+.pricing-card.featured:hover { transform: scale(1.03) translateY(-3px); }
+.pricing-badge {
+  display: inline-block; background: var(--brand-teal); color: #052620;
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.pricing-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+.pricing-desc { font-size: .875rem; color: var(--text-secondary); margin-bottom: 24px; }
+.pricing-card.featured .pricing-desc { color: rgba(255,255,255,.65); }
+.pricing-price { margin-bottom: 28px; }
+.pricing-amount { font-size: 3rem; font-weight: 900; line-height: 1; }
+.pricing-period { font-size: .875rem; color: var(--text-secondary); margin-top: 4px; }
+.pricing-card.featured .pricing-period { color: rgba(255,255,255,.55); }
+.pricing-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.pricing-feature {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .875rem; color: var(--text-secondary);
+}
+.pricing-card.featured .pricing-feature { color: rgba(255,255,255,.8); }
+.pricing-check { color: var(--brand-teal); font-weight: 800; flex-shrink: 0; }
+.pricing-divider { border: none; border-top: 1px solid var(--border-color); margin: 20px 0; }
+.pricing-card.featured .pricing-divider { border-color: rgba(255,255,255,.15); }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testimonial-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 28px;
+}
+.testimonial-stars { color: #F59E0B; font-size: .875rem; margin-bottom: 14px; }
+.testimonial-text { font-style: italic; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-dark), var(--brand-royal));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: .875rem;
+}
+.testimonial-name { font-weight: 700; font-size: .9rem; }
+.testimonial-role { font-size: .8rem; color: var(--text-muted); }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta-section {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, #1A256E 50%, #0F1D56 100%);
+  padding: 100px 0; text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(91,101,221,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section h2, .cta-section p { color: white; }
+.cta-section p { color: rgba(255,255,255,.7); max-width: 520px; margin: 16px auto 0; }
+.cta-actions { display: flex; justify-content: center; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+
+/* ============================================================
+   PRODUCT PAGES — Scribe & Radiology
+   ============================================================ */
+.product-hero {
+  background: var(--brand-dark);
+  padding: 100px 0 80px; position: relative; overflow: hidden;
+}
+.product-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(91,101,221,.3) 0%, transparent 65%);
+}
+.product-hero-content { position: relative; z-index: 1; }
+
+.workflow-step {
+  display: flex; gap: 20px; align-items: flex-start; padding: 24px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.workflow-step:last-child { border-bottom: none; }
+.step-num {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: var(--brand-royal); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: .9rem;
+}
+.step-content h4 { margin-bottom: 6px; }
+.step-content p { color: var(--text-secondary); font-size: .9rem; }
+
+/* ============================================================
+   RESOURCES PAGE
+   ============================================================ */
+.resource-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); overflow: hidden; transition: all .25s;
+}
+.resource-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--brand-royal); }
+.resource-thumb {
+  height: 160px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+.resource-body { padding: 20px 24px 24px; }
+.resource-type {
+  display: inline-block; padding: 3px 10px; border-radius: 4px;
+  font-size: .7rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.type-video { background: rgba(239,68,68,.1); color: #EF4444; }
+.type-pdf   { background: rgba(249,115,22,.1); color: #F97316; }
+.type-guide { background: rgba(59,130,246,.1); color: #3B82F6; }
+.type-webinar { background: rgba(168,85,247,.1); color: #A855F7; }
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.team-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 28px; text-align: center; transition: all .25s;
+}
+.team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.team-avatar {
+  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-royal) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: 1.5rem;
+}
+.team-name { font-weight: 800; margin-bottom: 4px; }
+.team-role { color: var(--brand-royal); font-size: .875rem; font-weight: 700; margin-bottom: 10px; }
+.team-bio { color: var(--text-secondary); font-size: .8125rem; line-height: 1.6; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--brand-dark); color: rgba(255,255,255,.6);
+  padding: 64px 0 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand p { color: rgba(255,255,255,.55); font-size: .875rem; margin-top: 12px; line-height: 1.7; }
+.footer-col h4 { color: white; font-weight: 700; margin-bottom: 16px; font-size: .9rem; }
+.footer-link {
+  display: block; color: rgba(255,255,255,.5); font-size: .875rem;
+  padding: 5px 0; cursor: pointer; transition: color .18s;
+}
+.footer-link:hover { color: white; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+  font-size: .8125rem;
+}
+.footer-socials { display: flex; gap: 12px; }
+.footer-social-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; color: rgba(255,255,255,.5);
+  transition: all .2s; font-size: .875rem;
+}
+.footer-social-btn:hover { background: rgba(255,255,255,.1); color: white; }
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.input-group { margin-bottom: 20px; }
+.input-label { display: block; font-size: .875rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+.input-field {
+  width: 100%; padding: 11px 16px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-color); background: var(--bg-primary);
+  color: var(--text-primary); font-family: 'Mulish', sans-serif; font-size: .9375rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.input-field:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(91,101,221,.15); }
+.input-field::placeholder { color: var(--text-muted); }
+
+/* ============================================================
+   MODAL / SIGNUP
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(8,14,34,.7); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl); padding: 48px 40px;
+  max-width: 520px; width: 100%; position: relative;
+  box-shadow: var(--shadow-xl);
+  animation: modalIn .3s ease;
+}
+@keyframes modalIn { from { transform: translateY(20px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-secondary); border: 1px solid var(--border-color);
+  cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); transition: all .2s;
+}
+.modal-close:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+.modal-plan-badge {
+  display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill);
+  background: var(--brand-ice); color: var(--brand-royal);
+  font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .modal-plan-badge { background: rgba(91,101,221,.2); }
+
+/* ============================================================
+   NOTIFICATION TOASTS
+   ============================================================ */
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
+.toast {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px; min-width: 280px;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn .3s ease; font-size: .875rem; font-weight: 600;
+}
+@keyframes toastIn { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+.toast.success { border-left: 3px solid var(--brand-teal); }
+.toast-icon { font-size: 1.1rem; }
+
+/* ============================================================
+   MISC UTILITIES
+   ============================================================ */
+.divider { border: none; border-top: 1px solid var(--border-color); margin: 48px 0; }
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: var(--radius-pill);
+  font-size: .75rem; font-weight: 800; letter-spacing: .04em;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.chip {
+  padding: 5px 14px; border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-color); font-size: .8125rem; font-weight: 600;
+  color: var(--text-secondary); cursor: pointer; transition: all .18s;
+}
+.chip:hover, .chip.active {
+  border-color: var(--brand-royal); color: var(--brand-royal);
+  background: var(--brand-ice);
+}
+[data-theme="dark"] .chip:hover, [data-theme="dark"] .chip.active {
+  background: rgba(91,101,221,.12); color: #818AEF;
+}
+
+.bg-secondary-section { background: var(--bg-secondary); }
+
+/* Roadmap */
+.roadmap-timeline { display: flex; flex-direction: column; gap: 0; }
+.roadmap-item { display: grid; grid-template-columns: 160px 1px 1fr; gap: 0 28px; align-items: start; padding: 24px 0; }
+.roadmap-date { text-align: right; font-weight: 700; font-size: .875rem; color: var(--text-muted); padding-top: 2px; }
+.roadmap-line { background: var(--border-color); position: relative; }
+.roadmap-dot {
+  position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 3px solid var(--bg-primary); background: var(--brand-royal);
+}
+.roadmap-dot.live { background: var(--brand-teal); }
+.roadmap-content { padding-left: 8px; }
+.roadmap-content h4 { margin-bottom: 4px; }
+.roadmap-content p { color: var(--text-secondary); font-size: .875rem; }
+
+/* Tab system */
+.tab-list { display: flex; gap: 4px; border-bottom: 2px solid var(--border-color); margin-bottom: 32px; }
+.tab-btn {
+  padding: 10px 20px; font-weight: 700; font-size: .9rem;
+  color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -2px; transition: all .2s; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: none; border-left: none; border-right: none; border-top: none;
+  font-family: 'Mulish', sans-serif;
+}
+.tab-btn:hover { color: var(--text-primary); background: var(--bg-secondary); }
+.tab-btn.active { color: var(--brand-royal); border-bottom-color: var(--brand-royal); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .hero-split { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { max-width: 520px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .pricing-card.featured { transform: none; }
+  .pricing-card.featured:hover { transform: translateY(-3px); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta-desktop { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-split { display: block; }
+  .hero-visual { display: none; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .roadmap-item { grid-template-columns: 100px 1px 1fr; }
+}
+
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .roadmap-item { grid-template-columns: 1fr; }
+  .roadmap-date, .roadmap-line { display: none; }
+  .roadmap-content { padding: 0; border-left: 3px solid var(--brand-royal); padding-left: 16px; }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-up { animation: fadeInUp .6s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+.delay-4 { animation-delay: .4s; }
+.delay-5 { animation-delay: .5s; }
+
+/* ============================================================
+   LOGO MARK SVG (inline)
+   ============================================================ */
+.logo-svg { width: 36px; height: 36px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+   NAVIGATION
+   ============================================================ -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer" role="link" tabindex="0" aria-label="Arogya Labs Home">
+        <div class="nav-logo-mark">A</div>
+        <span class="nav-logo-text">Arogya<span>Labs</span></span>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="nav-links" role="menubar">
+        <span class="nav-link active" id="nav-home" onclick="navigate('home')" role="menuitem" tabindex="0">Overview</span>
+
+        <!-- Products dropdown -->
+        <div class="nav-dropdown" role="none">
+          <span class="nav-link" id="nav-products" role="menuitem" tabindex="0" aria-haspopup="true">
+            Products ▾
+          </span>
+          <div class="nav-dropdown-menu" role="menu" aria-label="Products submenu">
+            <div class="nav-dropdown-item" onclick="navigate('scribe')" role="menuitem" tabindex="0">
+              <div class="nav-dropdown-icon" style="background:rgba(13,191,173,.1);">🎤</div>
+              <div>
+                <div style="color:var(--text-primary);font-size:.875rem;">AI Scribe</div>
+                <div style="color:var(--text-muted);font-size:.75rem;font-weight:400;">Clinical documentation</div>
+              </div>
+            </div>
+            <div class="nav-dropdown-item" onclick="navigate('radiology')" role="menuitem" tabindex="0">
+              <div class="nav-dropdown-icon" style="background:rgba(91,101,221,.1);">🩻</div>
+              <div>
+                <div style="color:var(--text-primary);font-size:.875rem;">AI Radiologist</div>
+                <div style="color:var(--text-muted);font-size:.75rem;font-weight:400;">Diagnostic imaging AI</div>
+              </div>
+            </div>
+            <div class="nav-dropdown-item" style="opacity:.6;cursor:default;">
+              <div class="nav-dropdown-icon" style="background:rgba(249,115,22,.1);">💊</div>
+              <div>
+                <div style="color:var(--text-primary);font-size:.875rem;">AI Pharmacist <span style="font-size:.65rem;background:#EFF0FB;color:#5B65DD;padding:1px 6px;border-radius:4px;margin-left:4px;">SOON</span></div>
+                <div style="color:var(--text-muted);font-size:.75rem;font-weight:400;">Medication intelligence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span class="nav-link" id="nav-pricing" onclick="navigate('pricing')" role="menuitem" tabindex="0">Pricing</span>
+        <span class="nav-link" id="nav-resources" onclick="navigate('resources')" role="menuitem" tabindex="0">Resources</span>
+        <span class="nav-link" id="nav-about" onclick="navigate('about')" role="menuitem" tabindex="0">About</span>
+      </div>
+
+      <!-- Right section -->
+      <div class="nav-right">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <span class="btn btn-secondary btn-sm nav-cta-desktop" onclick="navigate('pricing')" style="cursor:pointer">Log In</span>
+        <span class="btn btn-accent btn-sm nav-cta-desktop" onclick="openSignup('Free Trial')" style="cursor:pointer">Start Free</span>
+        <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false" id="hamburgerBtn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Mobile navigation">
+  <div class="mobile-nav-link" onclick="navigate('home');toggleMobileNav()">Overview</div>
+  <div class="mobile-nav-link" onclick="navigate('scribe');toggleMobileNav()">AI Scribe</div>
+  <div class="mobile-nav-link" onclick="navigate('radiology');toggleMobileNav()">AI Radiologist</div>
+  <div class="mobile-nav-link" onclick="navigate('pricing');toggleMobileNav()">Pricing</div>
+  <div class="mobile-nav-link" onclick="navigate('resources');toggleMobileNav()">Resources</div>
+  <div class="mobile-nav-link" onclick="navigate('about');toggleMobileNav()">About</div>
+  <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+    <span class="btn btn-secondary" onclick="openSignup('Free Trial');toggleMobileNav()" style="cursor:pointer;flex:1;justify-content:center">Log In</span>
+    <span class="btn btn-accent" onclick="openSignup('Free Trial');toggleMobileNav()" style="cursor:pointer;flex:1;justify-content:center">Start Free Trial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+   PAGE: HOME / OVERVIEW
+   ============================================================ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero section">
+    <div class="hero-grid-bg"></div>
+    <div class="container" style="width:100%">
+      <div class="hero-split">
+        <!-- Left -->
+        <div class="hero-content animate-up">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            AI Clinical Intelligence Platform
+          </div>
+          <h1 class="display-1">
+            The Future of<br>
+            <span class="gradient-text">Clinical Care</span><br>
+            Is Intelligent
+          </h1>
+          <p class="hero-sub body-lg">
+            Arogya Labs builds AI-native tools that eliminate documentation burden, accelerate diagnosis, and put physicians back in control of care — not paperwork.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-accent btn-lg" onclick="openSignup('Free Trial')">
+              Start Free Trial →
+            </button>
+            <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">
+              Watch Demo
+            </button>
+          </div>
+          <div class="hero-trust">
+            <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> HIPAA Compliant</div>
+            <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> EHR Integrated</div>
+            <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> No credit card required</div>
+          </div>
+        </div>
+
+        <!-- Right — Live Demo Visual -->
+        <div class="hero-visual animate-up delay-3">
+          <!-- AI Scribe Card -->
+          <div class="demo-card">
+            <div class="demo-card-header">
+              <span class="demo-dot red"></span><span class="demo-dot yellow"></span><span class="demo-dot green"></span>
+              <span class="demo-label">AI Scribe · Live</span>
+            </div>
+            <div class="demo-content">
+              <div style="color:rgba(255,255,255,.4);font-size:.7rem;margin-bottom:6px;font-weight:700;">SOAP NOTE GENERATED</div>
+              <div><span class="demo-tag">S</span> Patient reports 3-day history of productive cough…</div>
+              <div style="margin-top:6px;"><span class="demo-tag">A</span> Community-acquired pneumonia, mild severity</div>
+              <div style="margin-top:6px;"><span class="demo-tag">P</span> <span style="color:var(--brand-teal);">Amoxicillin 500mg TID × 7 days</span> · Follow-up 72h</div>
+            </div>
+          </div>
+          <!-- Radiology Card -->
+          <div class="demo-card">
+            <div class="demo-card-header">
+              <span class="demo-dot red"></span><span class="demo-dot yellow"></span><span class="demo-dot green"></span>
+              <span class="demo-label">AI Radiologist · Analysis</span>
+            </div>
+            <div class="demo-content">
+              <div style="color:rgba(255,255,255,.4);font-size:.7rem;margin-bottom:6px;font-weight:700;">CHEST X-RAY · FINDINGS</div>
+              <div>Right lower lobe consolidation consistent with <span style="color:#FF8A65;">pneumonia</span>. No pleural effusion. Heart size normal.</div>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <span style="background:rgba(239,68,68,.15);color:#FCA5A5;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:700;">HIGH CONFIDENCE 94%</span>
+                <span style="background:rgba(13,191,173,.1);color:var(--brand-teal);padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:700;">AUTO-REPORT READY</span>
+              </div>
+            </div>
+          </div>
+          <!-- Stats -->
+          <div class="demo-stat-row">
+            <div class="demo-stat">
+              <div class="demo-stat-num">73%</div>
+              <div class="demo-stat-label">Less Admin Time</div>
+            </div>
+            <div class="demo-stat">
+              <div class="demo-stat-num">2min</div>
+              <div class="demo-stat-label">Avg Note Time</div>
+            </div>
+            <div class="demo-stat">
+              <div class="demo-stat-num">99.1%</div>
+              <div class="demo-stat-label">Accuracy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="stats-strip" aria-label="Platform statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="text-center">
+          <div class="stat-num">10k+</div>
+          <div class="stat-label">Physicians Using Arogya</div>
+        </div>
+        <div class="text-center">
+          <div class="stat-num">5M+</div>
+          <div class="stat-label">Clinical Notes Generated</div>
+        </div>
+        <div class="text-center">
+          <div class="stat-num">94%</div>
+          <div class="stat-label">Diagnostic Accuracy</div>
+        </div>
+        <div class="text-center">
+          <div class="stat-num">2 hrs</div>
+          <div class="stat-label">Saved Per Physician Daily</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS OVERVIEW -->
+  <section class="section" aria-label="Products">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">✦ Platform Products</div>
+        <h2 class="heading-1">AI built for every clinical workflow</h2>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">
+          A unified intelligence layer that integrates with your existing EHR and works the way clinicians work.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Scribe -->
+        <div class="product-card" onclick="navigate('scribe')" tabindex="0" role="button" aria-label="Learn about AI Scribe">
+          <div class="product-card-header">
+            <span class="product-badge badge-live">✦ Available Now</span>
+            <div style="font-size:2.5rem;margin-bottom:16px;">🎤</div>
+            <h2 class="heading-2">AI Scribe</h2>
+            <p style="color:var(--text-secondary);margin-top:10px;">Ambient AI that listens to your patient conversation and auto-generates structured SOAP notes, referral letters, and billing codes in real time.</p>
+          </div>
+          <div class="product-card-body">
+            <ul class="feature-list">
+              <li>Real-time ambient transcription</li>
+              <li>SOAP note auto-generation</li>
+              <li>ICD-10 & CPT code suggestions</li>
+              <li>EHR push in one click</li>
+              <li>20+ specialty templates</li>
+            </ul>
+            <div style="margin-top:24px;">
+              <span class="btn btn-primary" style="width:100%;justify-content:center;cursor:pointer">Start Free Trial →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radiology -->
+        <div class="product-card" onclick="navigate('radiology')" tabindex="0" role="button" aria-label="Learn about AI Radiologist">
+          <div class="product-card-header">
+            <span class="product-badge badge-live">✦ Available Now</span>
+            <div style="font-size:2.5rem;margin-bottom:16px;">🩻</div>
+            <h2 class="heading-2">AI Radiologist</h2>
+            <p style="color:var(--text-secondary);margin-top:10px;">Advanced computer vision models that analyze X-rays, CTs, and MRIs to surface findings, flag critical results, and generate structured radiology reports.</p>
+          </div>
+          <div class="product-card-body">
+            <ul class="feature-list">
+              <li>X-Ray, CT & MRI analysis</li>
+              <li>Critical finding alerts</li>
+              <li>Structured report generation</li>
+              <li>DICOM native integration</li>
+              <li>Peer-review workflow</li>
+            </ul>
+            <div style="margin-top:24px;">
+              <span class="btn btn-primary" style="width:100%;justify-content:center;cursor:pointer">Request Access →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="product-card" style="opacity:.75;cursor:default;">
+          <div class="product-card-header">
+            <span class="product-badge badge-soon">🗓 Coming Q3 2025</span>
+            <div style="font-size:2.5rem;margin-bottom:16px;">💊</div>
+            <h2 class="heading-2">AI Pharmacist</h2>
+            <p style="color:var(--text-secondary);margin-top:10px;">Real-time drug interaction checking, dose optimization, formulary guidance, and medication reconciliation powered by the latest clinical pharmacology models.</p>
+          </div>
+          <div class="product-card-body">
+            <ul class="feature-list">
+              <li>Drug interaction alerts</li>
+              <li>Dosage optimization</li>
+              <li>Formulary compliance</li>
+              <li>Polypharmacy risk scoring</li>
+              <li>Patient medication counseling</li>
+            </ul>
+            <div style="margin-top:24px;">
+              <span class="btn btn-secondary" style="width:100%;justify-content:center;cursor:pointer">Join Waitlist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section bg-secondary-section" aria-label="How it works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">⚡ How It Works</div>
+        <h2 class="heading-1">Deploy in days, not months</h2>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">
+          Simple integration with your existing workflows. No rip-and-replace.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card text-center">
+          <div style="font-size:2.2rem;margin-bottom:16px;">⚙️</div>
+          <h3 class="heading-3">1. Activate</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Verify your email, create a username and password, and select your specialty using our onboarding wizard.</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2.2rem;margin-bottom:16px;">🔌</div>
+          <h3 class="heading-3">2. Connect</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">One-click EHR integration via our certified API.</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2.2rem;margin-bottom:16px;">📈</div>
+          <h3 class="heading-3">3. Scale</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Roll out across your practice or health system. Centralized admin dashboard and analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section" aria-label="Product roadmap">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">🗺 Platform Roadmap</div>
+        <h2 class="heading-1">Where we're headed</h2>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">
+          A transparent view of what's live, in progress, and on the horizon.
+        </p>
+      </div>
+
+      <div class="roadmap-timeline" style="max-width:720px;margin:0 auto;">
+        <div class="roadmap-item">
+          <div class="roadmap-date" style="color:var(--brand-teal);font-weight:800;">Q1 2025</div>
+          <div class="roadmap-line"><div class="roadmap-dot live"></div></div>
+          <div class="roadmap-content">
+            <span class="product-badge badge-live" style="margin-bottom:8px;">✦ Live</span>
+            <h4 class="heading-3">AI Scribe GA</h4>
+            <p>Ambient documentation, specialty templates, Epic & Cerner integrations, iOS app.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-date">Q2 2025</div>
+          <div class="roadmap-line"><div class="roadmap-dot"></div></div>
+          <div class="roadmap-content">
+            <span class="product-badge badge-soon" style="margin-bottom:8px;">Beta</span>
+            <h4 class="heading-3">AI Radiologist Beta</h4>
+            <p>Chest X-Ray AI, CT abdomen, DICOM viewer integration, critical result alerting.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-date">Q3 2025</div>
+          <div class="roadmap-line"><div class="roadmap-dot"></div></div>
+          <div class="roadmap-content">
+            <span class="product-badge badge-soon" style="margin-bottom:8px;">Planned</span>
+            <h4 class="heading-3">AI Pharmacist</h4>
+            <p>Drug interaction engine, dose optimizer, formulary integration with major PBMs.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-date">Q4 2025</div>
+          <div class="roadmap-line"><div class="roadmap-dot"></div></div>
+          <div class="roadmap-content">
+            <span class="product-badge badge-soon" style="margin-bottom:8px;">Planned</span>
+            <h4 class="heading-3">AI Ophthalmologist</h4>
+            <p>Retinal image analysis, diabetic retinopathy screening, glaucoma risk detection.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-date">2026</div>
+          <div class="roadmap-line"><div class="roadmap-dot"></div></div>
+          <div class="roadmap-content">
+            <span class="product-badge badge-soon" style="margin-bottom:8px;">Vision</span>
+            <h4 class="heading-3">Arogya Clinical OS</h4>
+            <p>Unified AI workspace across specialties, predictive care recommendations, health system command center.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="section-eyebrow" style="color:#A5ABEF;background:rgba(91,101,221,.2);border:1px solid rgba(91,101,221,.3);display:inline-flex;margin-bottom:20px;">
+        ✨ Start Today
+      </div>
+      <h2 class="display-2">Give physicians time back.<br>Start your free trial.</h2>
+      <p class="body-lg">No credit card. No long-term contracts. 30-day full access to all features.</p>
+      <div class="cta-actions">
+        <button class="btn btn-accent btn-lg" onclick="openSignup('Free Trial')">Start Free Trial — It's Free</button>
+        <button class="btn btn-ghost btn-lg" onclick="openSignup('Demo')">Schedule a Demo</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+   PAGE: AI SCRIBE
+   ============================================================ -->
+<div class="page" id="page-scribe">
+  <section class="product-hero">
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="product-hero-content">
+        <span class="product-badge badge-live" style="margin-bottom:20px;display:inline-block;">✦ Available Now · Free Trial</span>
+        <div style="font-size:3.5rem;margin-bottom:16px;">🎤</div>
+        <h1 class="display-2" style="color:white;max-width:600px;">Your AI-Powered Clinical Scribe</h1>
+        <p class="body-lg" style="color:rgba(255,255,255,.72);max-width:560px;margin-top:16px;">
+          Arogya Scribe listens to your patient visit — ambient, hands-free — and generates structured SOAP notes automatically. All in under 2 minutes.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-accent btn-lg" onclick="openSignup('Scribe Free Trial')">Start Free 30-Day Trial</button>
+          <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">See Demo Video</button>
+        </div>
+        <div class="hero-trust" style="margin-top:32px;">
+          <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> No credit card</div>
+          <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> HIPAA Compliant</div>
+          <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> EHR Integration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scribe features -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">⚡ Core Features</div>
+        <h2 class="heading-1">Everything a great scribe does — automatically</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🎙️</div>
+          <h3 class="heading-3">Ambient Transcription</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Start the recording. Arogya listens in the background with high transcription accuracy across 10+ Indian languages.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3 class="heading-3">Structured SOAP Notes</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Auto-generates structured Subjective, Objective, Assessment & Plan notes using specialty-specific terminology.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <h3 class="heading-3">EHR Integration</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Review and push notes directly to EHRs in a single click. No copy-paste, no re-entry.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3 class="heading-3">Live Clinical Guidance</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Context-aware prompts surface relevant follow-up questions for the doctor during the patient visit — not after the patient has left.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow -->
+  <section class="section bg-secondary-section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+        <div>
+          <div class="section-eyebrow" style="text-align:left;margin-left:0;">📋 Workflow</div>
+          <h2 class="heading-1" style="margin-top:12px;">How Scribe works in your day</h2>
+          <div class="roadmap-timeline" style="margin-top:32px;">
+            <div class="workflow-step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Patient enters the room</h4>
+                <p>Tap "Start Recording" in the Arogya app or EHR widget. Scribe begins ambient listening. You can pause and restart the recording anytime.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>AI processes in real time</h4>
+                <p>Large language models transcribe, extract clinical entities, and structure the conversation into note format. Stop recording once the visit is done.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Review the draft note</h4>
+                <p>A complete SOAP note appears in under 60 seconds post-visit. Edit the note as needed.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Push to EHR</h4>
+                <p>One tap to sign and send directly to the patient chart.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scribe live preview -->
+        <div style="background:var(--brand-dark);border-radius:var(--radius-xl);padding:28px;border:1px solid rgba(91,101,221,.3);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+            <span class="demo-dot red"></span><span class="demo-dot yellow"></span><span class="demo-dot green"></span>
+            <span style="color:rgba(255,255,255,.4);font-size:.75rem;margin-left:auto;font-weight:700;">Arogya Scribe · Live Preview</span>
+          </div>
+          <div style="background:rgba(13,191,173,.07);border:1px solid rgba(13,191,173,.2);border-radius:8px;padding:12px;margin-bottom:10px;">
+            <div style="color:var(--brand-teal);font-size:.7rem;font-weight:700;margin-bottom:6px;">🔴 RECORDING · ENCOUNTER IN PROGRESS</div>
+            <div style="color:rgba(255,255,255,.6);font-size:.8rem;line-height:1.6;">"...and I've had this chest tightness for about a week, it gets worse when I climb stairs..."</div>
+          </div>
+          <div style="color:rgba(255,255,255,.3);font-size:.7rem;font-weight:700;margin:12px 0 8px;letter-spacing:.06em;">AI-GENERATED NOTE</div>
+          <div style="color:rgba(255,255,255,.85);font-size:.8rem;line-height:1.8;">
+            <div><span style="color:#818AEF;font-weight:700;">S:</span> 45-year-old male presents with 1-week history of exertional chest tightness...</div>
+            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">O:</span> BP 138/86, HR 78, O2Sat 97%. EKG: sinus rhythm, no acute changes.</div>
+            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">A:</span> Stable angina vs atypical chest pain. R/O ACS.</div>
+            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">P:</span> Stress echo. Aspirin 81mg. Cardiology referral.</div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <span style="background:rgba(91,101,221,.2);color:#A5ABEF;padding:3px 10px;border-radius:4px;font-size:.7rem;font-weight:700;">I20.9 Angina</span>
+            <span style="background:rgba(91,101,221,.2);color:#A5ABEF;padding:3px 10px;border-radius:4px;font-size:.7rem;font-weight:700;">93350 Stress Echo</span>
+          </div>
+          <button class="btn btn-accent" style="width:100%;margin-top:16px;justify-content:center;" onclick="showToast('Note pushed to Epic successfully! 🎉')">
+            Push to Epic →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scribe Pricing CTA -->
+  <section class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 class="display-2" style="color:white;">Start scribing smarter today</h2>
+      <p class="body-lg" style="color:rgba(255,255,255,.7);margin-top:12px;">30-day free trial. No credit card. Full platform access.</p>
+      <div class="cta-actions">
+        <button class="btn btn-accent btn-lg" onclick="openSignup('Scribe Free Trial')">Start Free Trial</button>
+        <button class="btn btn-ghost btn-lg" onclick="navigate('pricing')">View Pricing</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============================================================
+   PAGE: AI RADIOLOGIST
+   ============================================================ -->
+<div class="page" id="page-radiology">
+  <section class="product-hero" style="background:linear-gradient(135deg, #0A1540 0%, #122056 60%, #151D48 100%);">
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="product-hero-content">
+        <span class="product-badge badge-live" style="margin-bottom:20px;display:inline-block;">✦ Available Now · Early Access</span>
+        <div style="font-size:3.5rem;margin-bottom:16px;">🩻</div>
+        <h1 class="display-2" style="color:white;max-width:640px;">AI-Powered Diagnostic Imaging Intelligence</h1>
+        <p class="body-lg" style="color:rgba(255,255,255,.72);max-width:560px;margin-top:16px;">
+          Arogya Radiologist applies deep learning to X-rays, CTs, and MRIs — surfacing findings in minutes, auto-generating structured reports, and alerting on critical results before they're missed.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-accent btn-lg" onclick="openSignup('Radiology Access')">Request Early Access</button>
+          <button class="btn btn-ghost btn-lg" onclick="openSignup('Radiology Demo')">Schedule Demo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Radiology features -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">🔬 Capabilities</div>
+        <h2 class="heading-1">The AI second opinion radiologists trust</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🫁</div>
+          <h3 class="heading-3">Chest X-Ray Analysis</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Detects pneumonia, cardiomegaly, pleural effusion, pneumothorax, and 14 other findings with 94% sensitivity validated on 1M+ studies.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3 class="heading-3">CT & MRI Processing</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Brain CT hemorrhage detection, abdominal organ segmentation, and spine MRI disc pathology identification — sub-specialist grade accuracy.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <h3 class="heading-3">Critical Result Alerting</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Immediate push notifications for critical findings — pneumothorax, large PE, hemorrhagic stroke — direct to the ordering physician's device.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📄</div>
+          <h3 class="heading-3">Auto-Report Generation</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Structured, ACR-template-compliant radiology reports pre-populated with AI findings. Radiologist edits and signs in minutes, not 30.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3 class="heading-3">Longitudinal Comparison</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Automatically compares to prior studies in the PACS and highlights interval changes — nodule growth, lesion resolution, disease progression.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3 class="heading-3">DICOM & PACS Native</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Integrates directly into your existing PACS workflow. No data migration. Works within your DICOM viewer as an AI overlay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modalities tabs -->
+  <section class="section bg-secondary-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">📡 Supported Modalities</div>
+        <h2 class="heading-1">Coverage across imaging modalities</h2>
+      </div>
+      <div class="tab-list">
+        <button class="tab-btn active" onclick="switchTab('radTab','rad-xray',this)">Chest X-Ray</button>
+        <button class="tab-btn" onclick="switchTab('radTab','rad-ct',this)">CT Scan</button>
+        <button class="tab-btn" onclick="switchTab('radTab','rad-mri',this)">MRI</button>
+        <button class="tab-btn" onclick="switchTab('radTab','rad-upcoming',this)">Coming Soon</button>
+      </div>
+      <div id="rad-xray" class="tab-panel active">
+        <div class="grid-3">
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Pneumonia Detection</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">94.2% sensitivity on multi-site validation cohort.</p></div>
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Pneumothorax</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Critical finding alert within 60 seconds of upload.</p></div>
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Cardiomegaly</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Cardiothoracic ratio calculation with trend tracking.</p></div>
+        </div>
+      </div>
+      <div id="rad-ct" class="tab-panel">
+        <div class="grid-3">
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Brain CT — Hemorrhage</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Sub-1-minute ICH detection with volume quantification.</p></div>
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Pulmonary Embolism</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">CTPA PE detection, burden scoring, RV/LV ratio.</p></div>
+          <div class="card"><div class="card-icon">✅</div><h3 class="heading-3">Abdominal Organ</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Liver, spleen, kidney segmentation and lesion detection.</p></div>
+        </div>
+      </div>
+      <div id="rad-mri" class="tab-panel">
+        <div class="grid-3">
+          <div class="card"><div class="card-icon">🔄</div><h3 class="heading-3">Brain MRI</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Lesion detection, T2/FLAIR volume quantification. Beta.</p></div>
+          <div class="card"><div class="card-icon">🔄</div><h3 class="heading-3">Spine MRI</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Disc herniation, stenosis grading. Beta rollout Q3.</p></div>
+          <div class="card"><div class="card-icon">🔄</div><h3 class="heading-3">Knee MRI</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Meniscal tear classification. Entering validation.</p></div>
+        </div>
+      </div>
+      <div id="rad-upcoming" class="tab-panel">
+        <div class="grid-3">
+          <div class="card" style="opacity:.7"><div class="card-icon">⏳</div><h3 class="heading-3">Mammography</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">BI-RADS scoring, density classification. Q1 2026.</p></div>
+          <div class="card" style="opacity:.7"><div class="card-icon">⏳</div><h3 class="heading-3">DXA / Bone Density</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Osteoporosis risk stratification. Q1 2026.</p></div>
+          <div class="card" style="opacity:.7"><div class="card-icon">⏳</div><h3 class="heading-3">Nuclear Medicine</h3><p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">PET-CT lesion quantification. H2 2026.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Radiology CTA -->
+  <section class="cta-section">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 class="display-2" style="color:white;">Catch more. Report faster. Reduce risk.</h2>
+      <p class="body-lg" style="color:rgba(255,255,255,.7);margin-top:12px;">Join radiology departments already using Arogya AI for first-pass triage and report assistance.</p>
+      <div class="cta-actions">
+        <button class="btn btn-accent btn-lg" onclick="openSignup('Radiology Access')">Request Early Access</button>
+        <button class="btn btn-ghost btn-lg" onclick="navigate('pricing')">View Pricing Plans</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============================================================
+   PAGE: PRICING
+   ============================================================ -->
+<div class="page" id="page-pricing">
+  <section style="background:var(--bg-secondary);padding:80px 0 40px;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">💳 Pricing</div>
+        <h1 class="display-2">Simple, transparent pricing</h1>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">Start free. Scale as you grow. No surprise fees, no annual lock-in required.</p>
+        <!-- Toggle Scribe/Radiology -->
+        <div class="chip-row" style="justify-content:center;margin-top:24px;">
+          <span class="chip active" id="chip-scribe" onclick="showPricingTab('scribe')">AI Scribe</span>
+          <span class="chip" id="chip-radiology" onclick="showPricingTab('radiology')">AI Radiologist</span>
+          <span class="chip" id="chip-enterprise" onclick="showPricingTab('enterprise')">Enterprise</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scribe Pricing -->
+  <section class="section" id="pricing-scribe">
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-desc">For individual physicians trying Arogya Scribe</div>
+          <div class="pricing-price">
+            <div class="pricing-amount">$0</div>
+            <div class="pricing-period">Free for 30 days · Then $0/mo on free tier</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> 30 encounters/month</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> SOAP note generation</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> 3 specialty templates</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Manual EHR copy-paste</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Email support</div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="openSignup('Starter')">Start Free</button>
+        </div>
+
+        <!-- Pro - Featured -->
+        <div class="pricing-card featured">
+          <span class="pricing-badge">Most Popular</span>
+          <div class="pricing-name" style="color:white;">Pro</div>
+          <div class="pricing-desc">For active physicians who see 20+ patients/day</div>
+          <div class="pricing-price">
+            <div class="pricing-amount" style="color:var(--brand-teal);">$149</div>
+            <div class="pricing-period">per physician / month · billed monthly</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Unlimited encounters</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> All 20+ specialty templates</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> ICD-10 & CPT auto-coding</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> EHR direct push (Epic, Cerner, Athena)</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Referral & after-visit letter generation</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Mobile app (iOS & Android)</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Priority support</div>
+          </div>
+          <button class="btn btn-accent" style="width:100%;justify-content:center;font-size:1rem;" onclick="openSignup('Pro')">Start 30-Day Free Trial</button>
+          <p style="color:rgba(255,255,255,.5);font-size:.75rem;text-align:center;margin-top:10px;">No credit card required</p>
+        </div>
+
+        <!-- Practice -->
+        <div class="pricing-card">
+          <div class="pricing-name">Practice</div>
+          <div class="pricing-desc">For group practices of 3–25 physicians</div>
+          <div class="pricing-price">
+            <div class="pricing-amount">$119</div>
+            <div class="pricing-period">per physician / month · billed annually</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Everything in Pro</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Centralized admin dashboard</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Practice-level analytics</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Custom note templates</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> SSO / SAML integration</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated onboarding specialist</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> SLA-backed support</div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openSignup('Practice')">Start Free Trial</button>
+        </div>
+      </div>
+
+      <!-- Enterprise callout -->
+      <div class="card" style="margin-top:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+        <div>
+          <div class="section-eyebrow" style="text-align:left;margin-bottom:8px;">🏥 Enterprise & Health Systems</div>
+          <h3 class="heading-3">Need 25+ physicians, custom integrations, or on-prem deployment?</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Custom pricing with volume discounts, dedicated infrastructure, BAA, and a named CSM.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openSignup('Enterprise')">Contact Sales →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Radiology Pricing (hidden by default) -->
+  <section class="section" id="pricing-radiology" style="display:none;">
+    <div class="container">
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">Radiologist Starter</div>
+          <div class="pricing-desc">For individual radiologists evaluating the platform</div>
+          <div class="pricing-price">
+            <div class="pricing-amount">$0</div>
+            <div class="pricing-period">Free trial · 100 studies</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> 100 chest X-ray analyses</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> AI finding overlay</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> PDF report export</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Basic alerting</div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Starter')">Start Free</button>
+        </div>
+        <div class="pricing-card featured">
+          <span class="pricing-badge">Most Popular</span>
+          <div class="pricing-name" style="color:white;">Radiologist Pro</div>
+          <div class="pricing-desc">For active radiology practices</div>
+          <div class="pricing-price">
+            <div class="pricing-amount" style="color:var(--brand-teal);">$299</div>
+            <div class="pricing-period">per radiologist / month</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Unlimited studies</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> All modalities (X-Ray, CT, MRI)</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Auto-report generation</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Critical result alerting</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> PACS integration</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Longitudinal comparison</div>
+          </div>
+          <button class="btn btn-accent" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Pro')">Request Access</button>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Department</div>
+          <div class="pricing-desc">For hospital radiology departments</div>
+          <div class="pricing-price">
+            <div class="pricing-amount">Custom</div>
+            <div class="pricing-period">Volume pricing available</div>
+          </div>
+          <hr class="pricing-divider">
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Everything in Pro</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> On-premise deployment option</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> HL7 FHIR integration</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Custom AI model fine-tuning</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated Rad AI specialist</div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openSignup('Radiology Department')">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise (hidden) -->
+  <section class="section" id="pricing-enterprise" style="display:none;">
+    <div class="container container-sm" style="text-align:center;">
+      <div style="font-size:3rem;margin-bottom:20px;">🏥</div>
+      <h2 class="heading-1">Enterprise & Health System Pricing</h2>
+      <p class="body-lg" style="color:var(--text-secondary);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;">
+        Custom contracts for large health systems, IDNs, and enterprise deployments. Volume pricing, custom SLAs, dedicated infrastructure.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:40px 0;max-width:600px;margin-left:auto;margin-right:auto;">
+        <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">📋</div><h4>Custom BAA</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Full HIPAA Business Associate Agreement tailored to your org.</p></div>
+        <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">🔒</div><h4>On-Premise Option</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Deploy within your own infrastructure for maximum data control.</p></div>
+        <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">👤</div><h4>Named CSM</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Dedicated Customer Success Manager and implementation team.</p></div>
+        <div class="card text-center"><div style="font-size:1.5rem;margin-bottom:8px;">📈</div><h4>Volume Pricing</h4><p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Significant per-seat discounts at 50+, 200+, and 1000+ physicians.</p></div>
+      </div>
+      <button class="btn btn-accent btn-lg" onclick="openSignup('Enterprise')">Talk to Enterprise Sales →</button>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section bg-secondary-section">
+    <div class="container container-sm">
+      <div class="section-header">
+        <div class="section-eyebrow">❓ FAQ</div>
+        <h2 class="heading-1">Common questions</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card" style="padding:20px 24px;">
+          <h4 style="margin-bottom:8px;">Is there really no credit card required for the free trial?</h4>
+          <p class="body-sm" style="color:var(--text-secondary);">Correct. The 30-day trial is fully functional with no payment information required. You'll be prompted to choose a plan only when the trial ends.</p>
+        </div>
+        <div class="card" style="padding:20px 24px;">
+          <h4 style="margin-bottom:8px;">How does EHR integration work?</h4>
+          <p class="body-sm" style="color:var(--text-secondary);">We integrate via certified FHIR APIs and EHR App Marketplace listings (Epic App Orchard, Cerner App Market). Setup typically takes under 48 hours with our integration team's support.</p>
+        </div>
+        <div class="card" style="padding:20px 24px;">
+          <h4 style="margin-bottom:8px;">Is patient data stored on Arogya servers?</h4>
+          <p class="body-sm" style="color:var(--text-secondary);">Audio is processed transiently and not stored. Note content is retained only in your EHR or on our HIPAA-compliant, SOC 2 certified infrastructure — never used for model training without explicit consent.</p>
+        </div>
+        <div class="card" style="padding:20px 24px;">
+          <h4 style="margin-bottom:8px;">Can I cancel anytime?</h4>
+          <p class="body-sm" style="color:var(--text-secondary);">Yes. Monthly plans can be cancelled at any time. Annual plans are refundable on a pro-rated basis within the first 90 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============================================================
+   PAGE: RESOURCES
+   ============================================================ -->
+<div class="page" id="page-resources">
+  <section style="background:var(--bg-secondary);padding:80px 0 40px;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">📚 Resources</div>
+        <h1 class="display-2">Learn, explore, and get started</h1>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">Product demos, one-pagers, clinical evidence, and onboarding guides.</p>
+        <div class="chip-row" style="justify-content:center;margin-top:24px;">
+          <span class="chip active">All</span>
+          <span class="chip">Video Demos</span>
+          <span class="chip">One-Pagers</span>
+          <span class="chip">Webinars</span>
+          <span class="chip">Clinical Evidence</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Featured Demo -->
+      <div class="card card-featured" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:48px;padding:40px;">
+        <div>
+          <span class="type-video" style="background:rgba(239,68,68,.15);color:#FCA5A5;padding:4px 12px;border-radius:4px;font-size:.75rem;font-weight:800;display:inline-block;margin-bottom:16px;">▶ FEATURED DEMO</span>
+          <h2 class="heading-1" style="color:white;">AI Scribe — Full Platform Walkthrough</h2>
+          <p style="color:rgba(255,255,255,.65);margin-top:12px;">Watch a real 15-minute clinical encounter, from patient greeting to note pushed to Epic. See exactly how Arogya Scribe fits into your day.</p>
+          <button class="btn btn-accent btn-lg" style="margin-top:24px;" onclick="showToast('🎬 Demo video launching... (placeholder)')">Watch Now — 18 min</button>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.1);" onclick="showToast('🎬 Demo video launching... (placeholder)')">
+          <div style="width:60px;height:60px;background:var(--brand-teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">▶</div>
+        </div>
+      </div>
+
+      <!-- Resource grid -->
+      <div class="grid-auto">
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#122056,#5B65DD);">🩻</div>
+          <div class="resource-body">
+            <span class="resource-type type-video">▶ Video Demo</span>
+            <h3 class="heading-3">AI Radiologist Demo</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">See how AI Radiologist analyzes a chest X-ray, generates findings, and pushes a report in under 3 minutes.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('🎬 Launching demo...')">Watch Demo — 12 min</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#F97316,#FBBF24);">📄</div>
+          <div class="resource-body">
+            <span class="resource-type type-pdf">📄 One-Pager</span>
+            <h3 class="heading-3">AI Scribe Product Overview</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">A concise 2-page overview of Arogya Scribe features, EHR integrations, and ROI data. Share with your CMO.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('📥 Downloading one-pager...')">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#0DBFAD,#122056);">🔬</div>
+          <div class="resource-body">
+            <span class="resource-type type-guide">📊 Clinical Evidence</span>
+            <h3 class="heading-3">Validation Study: AI Radiologist</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Peer-reviewed retrospective study across 1.2M chest X-rays. Sensitivity, specificity, and AUC data vs. board-certified radiologists.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('📥 Downloading study...')">Download Study</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#A855F7,#5B65DD);">🎙️</div>
+          <div class="resource-body">
+            <span class="resource-type type-webinar">🎙 Webinar Recording</span>
+            <h3 class="heading-3">Reducing Physician Burnout with AI</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">CME-eligible webinar with Dr. Johnson, Stanford Medicine. How ambient AI documentation is changing clinical practice.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('🎬 Loading webinar...')">Watch Recording</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#3B82F6,#0DBFAD);">🏥</div>
+          <div class="resource-body">
+            <span class="resource-type type-guide">📘 Case Study</span>
+            <h3 class="heading-3">Regional Health Network: 2-Hour ROI</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">How a 12-physician internal medicine practice saved 2+ hours per physician per day within 30 days of deployment.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('📥 Downloading case study...')">Read Case Study</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <div class="resource-thumb" style="background:linear-gradient(135deg,#122056,#0DBFAD);">⚙️</div>
+          <div class="resource-body">
+            <span class="resource-type type-guide">📘 Guide</span>
+            <h3 class="heading-3">EHR Integration Setup Guide</h3>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:6px;">Step-by-step technical guide for IT administrators covering Epic, Cerner, and Athena integration via FHIR APIs.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;" onclick="showToast('📥 Downloading guide...')">Download Guide</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter signup -->
+  <section class="cta-section" style="padding:64px 0;">
+    <div class="container" style="position:relative;z-index:1;max-width:600px;">
+      <h2 class="heading-1" style="color:white;">Stay ahead in clinical AI</h2>
+      <p style="color:rgba(255,255,255,.7);margin-top:12px;">New product updates, clinical evidence, and physician insights — monthly, never spammy.</p>
+      <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+        <input type="email" placeholder="your@email.com" class="input-field" style="flex:1;min-width:200px;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:white;" aria-label="Email address">
+        <button class="btn btn-accent" onclick="showToast('✅ You\'re subscribed!')">Subscribe</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============================================================
+   PAGE: ABOUT
+   ============================================================ -->
+<div class="page" id="page-about">
+  <section class="product-hero" style="min-height:auto;padding:100px 0 80px;">
+    <div class="hero-grid-bg"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="section-eyebrow" style="margin-bottom:20px;display:inline-flex;">🌿 About Arogya Labs</div>
+      <h1 class="display-2" style="color:white;max-width:640px;">Building AI that gives physicians time to heal</h1>
+      <p class="body-lg" style="color:rgba(255,255,255,.72);max-width:600px;margin-top:16px;">
+        Arogya means "health" in Sanskrit. We started this company because we watched brilliant physicians spend 40% of their day on documentation — not patients. We're changing that.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+        <div>
+          <div class="section-eyebrow" style="text-align:left;margin-bottom:16px;">🎯 Mission</div>
+          <h2 class="heading-1">AI that augments, not replaces, the clinician</h2>
+          <p class="body-lg" style="color:var(--text-secondary);margin-top:16px;">
+            We believe the physician-patient relationship is sacred. Our AI exists to handle the administrative and analytical tasks that pull physicians away from that relationship — documentation, imaging triage, coding, reporting.
+          </p>
+          <p class="body-md" style="color:var(--text-secondary);margin-top:16px;">
+            Every product we build is designed with a "physician in the loop" philosophy. AI provides the draft, the insight, the alert — the clinician makes the final call.
+          </p>
+          <div class="chip-row" style="margin-top:24px;">
+            <span class="chip active">Physician-First</span>
+            <span class="chip active">HIPAA Native</span>
+            <span class="chip active">Evidence-Based</span>
+            <span class="chip active">SOC 2 Certified</span>
+          </div>
+        </div>
+        <div class="grid-2" style="gap:16px;">
+          <div class="card text-center" style="padding:24px 16px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">🎓</div>
+            <h4 style="font-size:1.1rem;">Founded 2023</h4>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">By physicians, for physicians</p>
+          </div>
+          <div class="card text-center" style="padding:24px 16px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">🌎</div>
+            <h4 style="font-size:1.1rem;">Fremont, CA</h4>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">San Francisco Bay Area</p>
+          </div>
+          <div class="card text-center" style="padding:24px 16px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">💰</div>
+            <h4 style="font-size:1.1rem;">$12M Series A</h4>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Backed by top healthcare VCs</p>
+          </div>
+          <div class="card text-center" style="padding:24px 16px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">👩‍⚕️</div>
+            <h4 style="font-size:1.1rem;">10,000+ Doctors</h4>
+            <p class="body-sm" style="color:var(--text-secondary);margin-top:4px;">Trust Arogya daily</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section bg-secondary-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">👥 Leadership Team</div>
+        <h2 class="heading-1">Physicians and engineers united</h2>
+        <p class="body-lg" style="color:var(--text-secondary);margin-top:14px;">
+          [Placeholder: Add real team bios, photos, and LinkedIn links here]
+        </p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">RK</div>
+          <div class="team-name">Dr. Raj Kumar, MD</div>
+          <div class="team-role">Co-Founder & CEO</div>
+          <div class="team-bio">Former hospitalist at UCSF. 10+ years in clinical medicine. Frustrated by documentation burden, built the product he wished existed.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">PS</div>
+          <div class="team-name">Priya Sharma</div>
+          <div class="team-role">Co-Founder & CTO</div>
+          <div class="team-bio">PhD in NLP from Stanford. Former AI researcher at Google Health. Leads all model development and platform architecture.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">DL</div>
+          <div class="team-name">Dr. David Lee, MD</div>
+          <div class="team-role">Chief Medical Officer</div>
+          <div class="team-bio">Board-certified radiologist. Former clinical AI lead at a major academic medical center. Oversees clinical validation and safety.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">AM</div>
+          <div class="team-name">Ananya Mehta</div>
+          <div class="team-role">VP of Product</div>
+          <div class="team-bio">Former PM at Epic Systems. Deep expertise in healthcare interoperability, EHR workflow design, and clinical UX.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">TC</div>
+          <div class="team-name">Tom Chen</div>
+          <div class="team-role">VP of Engineering</div>
+          <div class="team-bio">Previously at Palantir and Flatiron Health. Leads a 30-person engineering team building HIPAA-compliant, real-time AI infrastructure.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">SB</div>
+          <div class="team-name">Sarah Brown</div>
+          <div class="team-role">VP of Sales & Partnerships</div>
+          <div class="team-bio">10+ years in health tech sales. Previously at Nuance (now Microsoft) and Doximity. Leads enterprise and health system partnerships.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">💡 Our Values</div>
+        <h2 class="heading-1">How we work</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🩺</div>
+          <h3 class="heading-3">Clinical Safety First</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">Every AI output is subject to physician review. We'd rather a doctor correct us than an AI harm a patient. Human in the loop, always.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3 class="heading-3">Privacy by Design</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">HIPAA compliance is a minimum, not a goal. We apply privacy-preserving ML techniques and never sell patient data. Period.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3 class="heading-3">Evidence-Based AI</h3>
+          <p class="body-sm" style="color:var(--text-secondary);margin-top:8px;">We validate every model on real-world clinical datasets before deployment and publish our results openly. No black boxes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Investors / Press -->
+  <section class="section bg-secondary-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">📰 Press & Recognition</div>
+        <h2 class="heading-1">In the news</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card" style="padding:24px;">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--text-muted);margin-bottom:12px;">STAT News</div>
+          <p class="body-sm" style="color:var(--text-secondary);font-style:italic;">"Arogya Labs is building one of the most complete clinical AI platforms we've seen from a startup of this size."</p>
+        </div>
+        <div class="card" style="padding:24px;">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--text-muted);margin-bottom:12px;">MedCity News</div>
+          <p class="body-sm" style="color:var(--text-secondary);font-style:italic;">"Named a Top 10 Health AI Startup to Watch — combining physician founders with world-class ML research."</p>
+        </div>
+        <div class="card" style="padding:24px;">
+          <div style="font-size:1.1rem;font-weight:800;color:var(--text-muted);margin-bottom:12px;">Fierce Healthcare</div>
+          <p class="body-sm" style="color:var(--text-secondary);font-style:italic;">"Arogya's AI Scribe is winning converts in practices that tried and abandoned other ambient documentation tools."</p>
+        </div>
+      </div>
+      <div style="margin-top:32px;text-align:center;">
+        <p class="body-sm" style="color:var(--text-muted);">Press inquiries: <a href="mailto:press@arogyalabs.ai" style="color:var(--brand-royal);">press@arogyalabs.ai</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join team CTA -->
+  <section class="cta-section" style="padding:80px 0;">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 class="heading-1" style="color:white;">Join the team building the future of clinical AI</h2>
+      <p style="color:rgba(255,255,255,.7);margin-top:12px;">We're hiring engineers, clinical informaticists, and product managers. Remote-first.</p>
+      <div class="cta-actions">
+        <button class="btn btn-accent btn-lg" onclick="showToast('🚀 Opening careers page...')">View Open Roles</button>
+        <button class="btn btn-ghost btn-lg" onclick="showToast('📬 Opening contact form...')">Get in Touch</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============================================================
+   FOOTER (shown on all pages)
+   ============================================================ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px;cursor:pointer;" onclick="navigate('home')">
+          <div class="nav-logo-mark">A</div>
+          <span class="nav-logo-text" style="color:white;">Arogya<span>Labs</span></span>
+        </div>
+        <p>AI Clinical Intelligence Platform — giving physicians time back, improving diagnostic accuracy, and reducing administrative burden across healthcare.</p>
+        <div class="footer-socials" style="margin-top:20px;">
+          <div class="footer-social-btn" aria-label="LinkedIn">in</div>
+          <div class="footer-social-btn" aria-label="Twitter">𝕏</div>
+          <div class="footer-social-btn" aria-label="YouTube">▶</div>
+        </div>
+      </div>
+      <!-- Products -->
+      <div class="footer-col">
+        <h4>Products</h4>
+        <span class="footer-link" onclick="navigate('scribe')">AI Scribe</span>
+        <span class="footer-link" onclick="navigate('radiology')">AI Radiologist</span>
+        <span class="footer-link" style="opacity:.5;cursor:default;">AI Pharmacist (Soon)</span>
+        <span class="footer-link" style="opacity:.5;cursor:default;">AI Diagnostician (Soon)</span>
+      </div>
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <span class="footer-link" onclick="navigate('about')">About Us</span>
+        <span class="footer-link" onclick="navigate('resources')">Resources</span>
+        <span class="footer-link">Blog</span>
+        <span class="footer-link">Careers</span>
+        <span class="footer-link">Press</span>
+      </div>
+      <!-- Legal & Support -->
+      <div class="footer-col">
+        <h4>Legal & Support</h4>
+        <span class="footer-link">Privacy Policy</span>
+        <span class="footer-link">Terms of Service</span>
+        <span class="footer-link">HIPAA Compliance</span>
+        <span class="footer-link">Security</span>
+        <span class="footer-link">Contact Support</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Arogya Labs, Inc. All rights reserved.</span>
+      <span style="color:rgba(255,255,255,.3);">HIPAA Compliant · SOC 2 Type II · Made with ❤️ for physicians</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+   SIGNUP MODAL
+   ============================================================ -->
+<div class="modal-overlay" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeSignup()" aria-label="Close modal">✕</button>
+    <span class="modal-plan-badge" id="modalPlanBadge">Free Trial</span>
+    <h2 class="heading-2" id="modalTitle" style="margin-bottom:6px;">Start your free trial</h2>
+    <p class="body-sm" style="color:var(--text-secondary);margin-bottom:28px;">30 days full access. No credit card required.</p>
+
+    <div class="input-group">
+      <label class="input-label" for="signupFirst">First Name</label>
+      <input type="text" id="signupFirst" class="input-field" placeholder="Jane" autocomplete="given-name">
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signupLast">Last Name</label>
+      <input type="text" id="signupLast" class="input-field" placeholder="Smith" autocomplete="family-name">
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signupEmail">Work Email</label>
+      <input type="email" id="signupEmail" class="input-field" placeholder="jane@clinic.com" autocomplete="email">
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signupSpecialty">Specialty</label>
+      <select id="signupSpecialty" class="input-field" style="cursor:pointer;">
+        <option value="">Select your specialty...</option>
+        <option>Family Medicine</option>
+        <option>Internal Medicine</option>
+        <option>Cardiology</option>
+        <option>Radiology</option>
+        <option>Pediatrics</option>
+        <option>Orthopedics</option>
+        <option>Psychiatry</option>
+        <option>Emergency Medicine</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <button class="btn btn-accent" style="width:100%;justify-content:center;font-size:1rem;padding:14px;" onclick="submitSignup()">
+      Create Free Account →
+    </button>
+    <p style="color:var(--text-muted);font-size:.75rem;text-align:center;margin-top:12px;">
+      By signing up you agree to our <a href="#" style="color:var(--brand-royal);">Terms</a> and <a href="#" style="color:var(--brand-royal);">Privacy Policy</a>
+    </p>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+
+<!-- ============================================================
+   JAVASCRIPT
+   ============================================================ -->
+<script>
+// ---- Navigation ----
+let currentPage = 'home';
+const pages = ['home','scribe','radiology','pricing','resources','about'];
+
+function navigate(page) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    const link = document.getElementById('nav-' + p);
+    if (el) el.classList.toggle('active', p === page);
+    if (link) link.classList.toggle('active', p === page);
+  });
+  // Also handle products submenu active states
+  ['scribe','radiology'].forEach(p => {
+    const link = document.getElementById('nav-' + p);
+    if (link) link.classList.toggle('active', p === page);
+  });
+  currentPage = page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeMobileNav();
+}
+
+// Scroll -> nav shadow
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ---- Theme Toggle ----
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+}
+
+// ---- Mobile Nav ----
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburgerBtn');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburgerBtn').setAttribute('aria-expanded', false);
+}
+
+// ---- Tabs ----
+function switchTab(groupId, tabId, btn) {
+  const container = btn.closest('section') || document;
+  const panels = container.querySelectorAll('.tab-panel');
+  const btns = btn.parentElement.querySelectorAll('.tab-btn');
+  panels.forEach(p => p.classList.remove('active'));
+  btns.forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- Pricing tab ----
+function showPricingTab(tab) {
+  ['scribe','radiology','enterprise'].forEach(t => {
+    const el = document.getElementById('pricing-' + t);
+    const chip = document.getElementById('chip-' + t);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+    if (chip) chip.classList.toggle('active', t === tab);
+  });
+}
+
+// ---- Modal ----
+function openSignup(plan) {
+  document.getElementById('modalPlanBadge').textContent = plan || 'Free Trial';
+  document.getElementById('signupModal').classList.add('open');
+  document.getElementById('signupEmail').focus();
+}
+function closeSignup() {
+  document.getElementById('signupModal').classList.remove('open');
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('signupModal')) closeSignup();
+}
+function submitSignup() {
+  const email = document.getElementById('signupEmail').value;
+  if (!email || !email.includes('@')) {
+    showToast('⚠️ Please enter a valid work email address', 'warning');
+    return;
+  }
+  closeSignup();
+  showToast('🎉 Welcome to Arogya Labs! Check your email to activate your account.');
+}
+// ESC to close
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSignup(); });
+
+// ---- Toast ----
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.innerHTML = `<span class="toast-icon">${type === 'success' ? '✅' : '⚠️'}</span><span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(20px)'; toast.style.transition = 'all .3s'; setTimeout(() => toast.remove(), 300); }, 3500);
+}
+
+// ---- Keyboard nav on nav links ----
+document.querySelectorAll('.nav-link, .nav-dropdown-item, .mobile-nav-link').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+});
+
+// ---- Animate on scroll (simple IntersectionObserver) ----
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .product-card, .testimonial-card, .pricing-card, .resource-card, .team-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
