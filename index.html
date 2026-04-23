@@ -1544,8 +1544,16 @@ footer {
   <section class="section" id="pricing-scribe" style="padding:120px 20px;font-family:Mulish, sans-serif;">
   <div style="max-width:1180px;margin:auto;">
     <style>
-      #pricing-scribe .pricing-table-wrap { border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; background:#fff; }
+      #pricing-scribe .pricing-table-wrap {  border:1px solid #e5e7eb;
+  border-radius:14px;
+  overflow-x:auto;   /* 🔥 MAIN FIX */
+  overflow-y:hidden;
+  -webkit-overflow-scrolling: touch;
+  background:#fff; }
       #pricing-scribe .pricing-table { width:100%; border-collapse:collapse; table-layout:fixed; }
+      #pricing-scribe .pricing-table {
+  min-width: 900px;   /* 🔥 IMPORTANT */
+}
       #pricing-scribe .pricing-table col:first-child { width:30%; }
       #pricing-scribe .pricing-table col:not(:first-child) { width:17.5%; }
       #pricing-scribe .pricing-table thead { background:#f9fafb; }
@@ -1597,6 +1605,29 @@ footer {
         text-transform:uppercase;
         margin-bottom:6px;
       }
+      @media (max-width: 768px) {
+
+  #pricing-scribe {
+    padding: 80px 10px;
+  }
+
+  #pricing-scribe .pricing-table th,
+  #pricing-scribe .pricing-table td {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  #pricing-scribe .plan-head {
+    min-height: auto;
+  }
+
+  #pricing-scribe .plan-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: auto;
+  }
+
+}
     </style>
 
     <div class="pricing-table-wrap">
