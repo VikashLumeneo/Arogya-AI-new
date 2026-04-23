@@ -924,6 +924,11 @@ body.nav-open {
     gap: 40px;
   }
 }
+.disabled-btn {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -1528,7 +1533,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           Arogya's AI Radiologist applies deep learning to CTs, and MRIs — surfacing findings in minutes, auto-generating structured reports, and alerting on critical results before they're missed.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-accent btn-lg" onclick="openSignup('AI Radiology')">Request Early Access</button>
+          <button class="btn btn-accent btn-lg" onclick="openSignup('AI Radiologist')">Request Early Access</button>
           <!-- <button class="btn btn-ghost btn-lg" onclick="openSignup('Radiology Demo')">Schedule Demo</button> -->
         </div>
       </div>
@@ -1627,7 +1632,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
       <h2 class="display-2" style="color:white;">Catch more. Report faster. Reduce risk.</h2>
       <p class="body-lg" style="color:rgba(255,255,255,.7);margin-top:12px;">Join radiology departments already using Arogya AI for first-pass triage and report assistance.</p>
       <div class="cta-actions">
-        <button class="btn btn-accent btn-lg" onclick="openSignup('AI Radiology')">Request Early Access</button>
+        <button class="btn btn-accent btn-lg" onclick="openSignup('AI Radiologist')">Request Early Access</button>
         <button class="btn btn-ghost btn-lg" onclick="navigate('pricing')">View Plans</button>
       </div>
     </div>
@@ -2014,8 +2019,29 @@ update();
             <div class="pricing-feature"><span class="pricing-check">✓</span> DICOM & PACS integration</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Direct line to our product team</div>
           </div>
-                <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')">Request Early Access</button>
-        </div>
+<button 
+  class="btn btn-accent" 
+  style="width:100%;justify-content:center;" 
+  onclick="openModal('early-access')"
+>
+  Request Early Access
+</button>       </div>
+<script>
+function openModal(plan) {
+  const modal = document.querySelector(".modal-overlay");
+  modal.classList.add("open");
+
+  // Plan name change (optional but pro UX)
+  const badge = document.querySelector(".modal-plan-badge");
+  if (badge) {
+    badge.innerText = plan === 'early-access' ? 'Early Access' : 'Plan';
+  }
+}
+
+function closeModal() {
+  document.querySelector(".modal-overlay").classList.remove("open");
+}
+</script>
         <div class="pricing-card featured">
           <!-- <span class="pricing-badge">Most Popular</span> -->
           <div class="pricing-name" style="color:white;">Pro</div>
@@ -2034,12 +2060,11 @@ update();
             <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> Longitudinal comparison</div> -->
           </div>
 <button 
-  class="btn btn-accent" 
-  style="width:100%;justify-content:center;" 
-  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+  class="btn btn-accent disabled-btn"
+  style="width:100%;justify-content:center;"
 >
   Request Access
-</button>        
+</button>      
 </div>
         <div class="pricing-card featured">
           <div class="pricing-name">Department</div>
@@ -2057,9 +2082,8 @@ update();
             <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated Rad AI specialist</div> -->
           </div>
           <button 
-  class="btn btn-primary" 
-  style="width:100%;justify-content:center;" 
-  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+  class="btn btn-accent disabled-btn"
+  style="width:100%;justify-content:center;"
 >
   Request Access
 </button>
@@ -2509,9 +2533,9 @@ update();
     <button class="btn btn-accent" style="width:100%;justify-content:center;font-size:1rem;padding:14px;" onclick="submitSignup()">
       Request Early Access →
     </button>
-    <p style="color:var(--text-muted);font-size:.75rem;text-align:center;margin-top:12px;">
+    <!-- <p style="color:var(--text-muted);font-size:.75rem;text-align:center;margin-top:12px;">
       By signing up you agree to our <a href="#" style="color:var(--brand-royal);">Terms</a> and <a href="#" style="color:var(--brand-royal);">Privacy Policy</a>
-    </p>
+    </p> -->
   </div>
 </div>
 
