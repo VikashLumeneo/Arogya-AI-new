@@ -805,7 +805,11 @@ footer {
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   .roadmap-item { grid-template-columns: 100px 1px 1fr; }
 }
-
+body.nav-open {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+}
 @media (max-width: 480px) {
   .team-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
@@ -833,7 +837,10 @@ footer {
    LOGO MARK SVG (inline)
    ============================================================ */
 .logo-svg { width: 36px; height: 36px; }
-
+body.nav-open {
+  overflow: hidden;
+  height: 100vh;
+}
 #page-scribe .scribe-workflow {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2457,20 +2464,27 @@ let currentPage = 'home';
 const pages = ['home','scribe','radiology','pricing','resources','about'];
 
 function navigate(page) {
+  // 🔥 STEP 1: pehle nav close karo (important)
+  closeMobileNav();
+
   pages.forEach(p => {
     const el = document.getElementById('page-' + p);
     const link = document.getElementById('nav-' + p);
+
     if (el) el.classList.toggle('active', p === page);
     if (link) link.classList.toggle('active', p === page);
   });
-  // Also handle products submenu active states
+
+  // products submenu active
   ['scribe','radiology'].forEach(p => {
     const link = document.getElementById('nav-' + p);
     if (link) link.classList.toggle('active', p === page);
   });
+
   currentPage = page;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  closeMobileNav();
+
+  // 🔥 STEP 2: ALWAYS GO TOP (no smooth for instant fix)
+  window.scrollTo(0, 0);
 }
 
 // Scroll -> nav shadow
@@ -2487,15 +2501,37 @@ function toggleTheme() {
 }
 
 // ---- Mobile Nav ----
+let scrollY = 0;
+
 function toggleMobileNav() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburgerBtn');
+  const body = document.body;
+
   const open = nav.classList.toggle('open');
   btn.setAttribute('aria-expanded', open);
+
+  if (open) {
+    scrollY = window.scrollY;
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
+  } else {
+    body.style.position = '';
+    body.style.top = '';
+    body.style.width = '';
+    window.scrollTo(0, scrollY);
+  }
 }
 function closeMobileNav() {
-  document.getElementById('mobileNav').classList.remove('open');
-  document.getElementById('hamburgerBtn').setAttribute('aria-expanded', false);
+  const nav = document.getElementById('mobileNav');
+  const body = document.body;
+
+  nav.classList.remove('open');
+
+  body.style.position = '';
+  body.style.top = '';
+  body.style.width = '';
 }
 
 // ---- Tabs ----
