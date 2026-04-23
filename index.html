@@ -265,6 +265,18 @@ ul { list-style: none; }
   width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; font-size: 1rem;
 }
+#productsDropdown .nav-dropdown-menu {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px) scale(.97);
+  transition: all .2s;
+}
+
+#productsDropdown.open .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
 
 /* Nav right */
 .nav-right { display: flex; align-items: center; gap: 12px; }
@@ -856,7 +868,7 @@ footer {
         <span class="nav-link active" id="nav-home" onclick="navigate('home')" role="menuitem" tabindex="0">Overview</span>
 
         <!-- Products dropdown -->
-        <div class="nav-dropdown" role="none">
+        <div class="nav-dropdown" id="productsDropdown" role="none">
           <span class="nav-link" id="nav-products" role="menuitem" tabindex="0" aria-haspopup="true">
             Products ▾
           </span>
@@ -884,6 +896,30 @@ footer {
             </div>
           </div>
         </div>
+        <script id="dropdownFix">
+const dropdown = document.getElementById("productsDropdown");
+const trigger = dropdown.querySelector("#nav-products");
+
+// toggle on click
+trigger.addEventListener("click", (e) => {
+  e.stopPropagation();
+  dropdown.classList.toggle("open");
+});
+
+// close when clicking anywhere else
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target)) {
+    dropdown.classList.remove("open");
+  }
+});
+
+// close after selecting item
+dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
+  item.addEventListener("click", () => {
+    dropdown.classList.remove("open");
+  });
+});
+</script>
 
         <span class="nav-link" id="nav-pricing" onclick="navigate('pricing')" role="menuitem" tabindex="0">Plans</span>
         <!-- <span class="nav-link" id="nav-resources" onclick="navigate('resources')" role="menuitem" tabindex="0">Resources</span> -->
