@@ -159,6 +159,36 @@ ul { list-style: none; }
 /* ============================================================
    BUTTONS
    ============================================================ */
+   .pricing-card .btn {
+  margin-top: auto;
+  background: var(--brand-teal);
+  color: #fff;
+  border: none;
+    /* background: var(--brand-teal) !important; */
+  color: #fff !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.pricing-card .btn:hover {
+  opacity: 0.9;
+    background: #1aa99a; 
+}
+.pricing-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.pricing-card {
+   display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 32px;
+  border-radius: 24px;
+}
+.pricing-features {
+  flex-grow: 1;
+}
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 28px; border-radius: var(--radius-pill);
@@ -480,7 +510,7 @@ ul { list-style: none; }
 /* ============================================================
    PRICING
    ============================================================ */
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+.pricing-grid { display: flex; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
 .pricing-card {
   background: var(--bg-card); border: 1px solid var(--border-color);
   border-radius: var(--radius-xl); padding: 36px; transition: all .25s;
@@ -938,7 +968,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
         <!-- <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
           <span id="themeIcon">🌙</span>
         </button> -->
-        <span class="btn btn-secondary btn-sm nav-cta-desktop" onclick="navigate('pricing')" style="cursor:pointer">Log In</span>
+        <!-- <span class="btn btn-secondary btn-sm nav-cta-desktop" onclick="navigate('pricing')" style="cursor:pointer">Log In</span> -->
        <span 
   class="btn btn-accent btn-sm nav-cta-desktop" 
   onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')" 
@@ -963,13 +993,13 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
   <!-- <div class="mobile-nav-link" onclick="navigate('resources')">Resources</div> -->
   <!-- <div class="mobile-nav-link" onclick="navigate('about')">About</div> -->
   <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
-    <span 
+    <!-- <span 
   class="btn btn-secondary" 
   onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer'); closeMobileNav()" 
   style="cursor:pointer;flex:1;justify-content:center"
 >
   Log In
-</span>
+</span> -->
    <a 
   href="https://dev.arogyalabs.ai/signup?trial=true"
   class="btn btn-accent"
@@ -1314,7 +1344,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
 >
   Start Free 14-Day Trial
 </button>
-          <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">See Demo Video</button>
+          <!-- <button class="btn btn-ghost btn-lg" onclick="navigate('resources')">See Demo Video</button> -->
         </div>
         <div class="hero-trust" style="margin-top:32px;">
           <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> No credit card</div>
@@ -1358,73 +1388,72 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
     </div>
   </section>
 
-  <!-- Workflow -->
-  <section class="section bg-secondary-section">
-    <div class="container">
-      <div class="scribe-workflow">
-        <div>
-          <div class="section-eyebrow" style="text-align:left;margin-left:0;"> Workflow</div>
-          <h2 class="heading-1" style="margin-top:12px;">How Scribe works in your day</h2>
-          <div class="roadmap-timeline" style="margin-top:32px;">
-            <div class="workflow-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Patient enters the room</h4>
-                <p>Tap "Start Recording" in the Arogya app or EHR widget. Scribe begins ambient listening. You can pause and restart the recording anytime.</p>
-              </div>
-            </div>
-            <div class="workflow-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>AI processes in real time</h4>
-                <p>Large language models transcribe, extract clinical entities, and structure the conversation into note format. Stop recording once the visit is done.</p>
-              </div>
-            </div>
-            <div class="workflow-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Review the draft note</h4>
-                <p>A complete SOAP note appears in under 60 seconds post-visit. Edit the note as needed.</p>
-              </div>
-            </div>
-            <div class="workflow-step">
-              <div class="step-num">4</div>
-              <div class="step-content">
-                <h4>Push to EHR</h4>
-                <p>One tap to sign and send directly to the patient chart.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+ <!-- Workflow -->
+<section class="section bg-secondary-section">
+  <div class="container">
 
-        <!-- Scribe live preview -->
-        <div style="background:var(--brand-dark);border-radius:var(--radius-xl);padding:28px;border:1px solid rgba(91,101,221,.3);">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-            <span class="demo-dot red"></span><span class="demo-dot yellow"></span><span class="demo-dot green"></span>
-            <span style="color:rgba(255,255,255,.4);font-size:.75rem;margin-left:auto;font-weight:700;">Arogya Scribe · Live Preview</span>
+    <!-- TOP HEADING (FULL WIDTH) -->
+    <div style="margin-bottom:40px;">
+      <div class="section-eyebrow" style="text-align:left;margin-left:0;">
+        Workflow
+      </div>
+      <h2 class="heading-1" style="margin-top:12px;">
+        How Scribe works in your day
+      </h2>
+    </div>
+
+    <!-- 2 COLUMN LAYOUT -->
+    <div class="scribe-workflow">
+
+      <!-- LEFT SIDE (STEPS) -->
+      <div class="workflow-left">
+        <div class="roadmap-timeline">
+
+          <div class="workflow-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Patient enters the room</h4>
+              <p>Tap "Start Recording" in the Arogya app or EHR widget. Scribe begins ambient listening. You can pause and restart the recording anytime.</p>
+            </div>
           </div>
-          <div style="background:rgba(13,191,173,.07);border:1px solid rgba(13,191,173,.2);border-radius:8px;padding:12px;margin-bottom:10px;">
-            <div style="color:var(--brand-teal);font-size:.7rem;font-weight:700;margin-bottom:6px;">🔴 RECORDING · ENCOUNTER IN PROGRESS</div>
-            <div style="color:rgba(255,255,255,.6);font-size:.8rem;line-height:1.6;">"...and I've had this chest tightness for about a week, it gets worse when I climb stairs..."</div>
+
+          <div class="workflow-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>AI processes in real time</h4>
+              <p>Large language models transcribe, extract clinical entities, and structure the conversation into note format. Stop recording once the visit is done.</p>
+            </div>
           </div>
-          <div style="color:rgba(255,255,255,.3);font-size:.7rem;font-weight:700;margin:12px 0 8px;letter-spacing:.06em;">AI-GENERATED NOTE</div>
-          <div style="color:rgba(255,255,255,.85);font-size:.8rem;line-height:1.8;">
-            <div><span style="color:#818AEF;font-weight:700;">S:</span> 45-year-old male presents with 1-week history of exertional chest tightness...</div>
-            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">O:</span> BP 138/86, HR 78, O2Sat 97%. EKG: sinus rhythm, no acute changes.</div>
-            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">A:</span> Stable angina vs atypical chest pain. R/O ACS.</div>
-            <div style="margin-top:4px;"><span style="color:#818AEF;font-weight:700;">P:</span> Stress echo. Aspirin 81mg. Cardiology referral.</div>
+
+          <div class="workflow-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Review the draft note</h4>
+              <p>A complete SOAP note appears in under 60 seconds post-visit. Edit the note as needed.</p>
+            </div>
           </div>
-          <div style="display:flex;gap:8px;margin-top:14px;">
-            <span style="background:rgba(91,101,221,.2);color:#A5ABEF;padding:3px 10px;border-radius:4px;font-size:.7rem;font-weight:700;">I20.9 Angina</span>
-            <span style="background:rgba(91,101,221,.2);color:#A5ABEF;padding:3px 10px;border-radius:4px;font-size:.7rem;font-weight:700;">93350 Stress Echo</span>
+
+          <div class="workflow-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Push to EHR</h4>
+              <p>One tap to sign and send directly to the patient chart.</p>
+            </div>
           </div>
-          <button class="btn btn-accent" style="width:100%;margin-top:16px;justify-content:center;" onclick="showToast('Note pushed to Epic successfully! 🎉')">
-            Push to Epic →
-          </button>
+
         </div>
       </div>
+
+      <!-- RIGHT SIDE (IMAGE) -->
+      <div class="workflow-right">
+        <div class="soap-image-wrapper">
+          <img src="assets/SOAP1.jpeg" alt="SOAP Note" class="soap-image" />
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Scribe Pricing CTA -->
   <section class="cta-section">
@@ -1459,13 +1488,8 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           Arogya Radiologist applies deep learning to X-rays, CTs, and MRIs — surfacing findings in minutes, auto-generating structured reports, and alerting on critical results before they're missed.
         </p>
         <div class="hero-actions">
-<button 
-  class="btn btn-accent btn-lg" 
-  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
->
-  Request Early Access
-</button>
-          <button class="btn btn-ghost btn-lg" onclick="openSignup('Radiology Demo')">Schedule Demo</button>
+          <button class="btn btn-accent btn-lg" onclick="openSignup('Ai Radiology')">Request Early Access</button>
+          <!-- <button class="btn btn-ghost btn-lg" onclick="openSignup('Radiology Demo')">Schedule Demo</button> -->
         </div>
       </div>
     </div>
@@ -1563,7 +1587,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
       <h2 class="display-2" style="color:white;">Catch more. Report faster. Reduce risk.</h2>
       <p class="body-lg" style="color:rgba(255,255,255,.7);margin-top:12px;">Join radiology departments already using Arogya AI for first-pass triage and report assistance.</p>
       <div class="cta-actions">
-        <button class="btn btn-accent btn-lg" onclick="openSignup('Radiology Access')">Request Early Access</button>
+        <button class="btn btn-accent btn-lg" onclick="openSignup('Ai Radiology')">Request Early Access</button>
         <button class="btn btn-ghost btn-lg" onclick="navigate('pricing')">View Plans</button>
       </div>
     </div>
@@ -1774,7 +1798,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           <tr>
             <td class="feature-title">
               Multilingual support
-              <div class="muted-meta">All 10 languages</div>
+              <!-- <div class="muted-meta">All 10 languages</div> -->
             </td>
             <td data-col="0">3 languages</td>
             <td data-col="1">3 languages</td>
@@ -1785,7 +1809,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           <tr>
             <td class="feature-title">
               EHR / HIMS integration
-              <div class="muted-meta">All systems from Hospital plan</div>
+              <!-- <div class="muted-meta">All systems from Hospital plan</div> -->
             </td>
             <td data-col="0">1 system</td><td data-col="1">1 system</td>
             <td data-col="2" style="background:#1E2B6A;color:#fff;">✓ All systems</td>
@@ -1802,7 +1826,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           <tr>
             <td class="feature-title">
               Custom model fine-tuning
-              <div class="muted-meta">Network plan only</div>
+              <!-- <div class="muted-meta">Network plan only</div> -->
             </td>
             <td data-col="0">—</td><td data-col="1">—</td>
             <td data-col="2" style="background:#1E2B6A;color:#fff;">—</td>
@@ -1812,7 +1836,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
           <tr>
             <td class="feature-title">
               Dedicated account manager
-              <div class="muted-meta">Network plan only</div>
+              <!-- <div class="muted-meta">Network plan only</div> -->
             </td>
             <td data-col="0">—</td><td data-col="1">—</td>
             <td data-col="2" style="background:#1E2B6A;color:#fff;">—</td>
@@ -1935,16 +1959,16 @@ update();
   <section class="section" id="pricing-radiology" style="display:none;">
     <div class="container">
       <div class="pricing-grid">
-        <div class="pricing-card">
+        <div class="pricing-card featured">
           <div class="pricing-name">Early Access</div>
-          <div class="pricing-desc">Full brta access while we refine the platform with your feedback.</div>
+          <div class="pricing-desc">Full beta access while we refine the platform with your feedback.</div>
           <div class="pricing-price">
-            <div class="pricing-amount">$0</div>
-            <div class="pricing-period">Free trial · 100 studies</div>
+            <!-- <div class="pricing-amount">$0</div> -->
+            <!-- <div class="pricing-period">Free trial · 100 studies</div> -->
           </div>
           <hr class="pricing-divider">
           <div class="pricing-features">
-            <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> 100 chest X-ray analyses</div> -->
+            <div class="pricing-feature"><span class="pricing-check">✓</span>CT & MRI analysis</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Critical result alerting</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Auto-report generation</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> DICOM & PACS integration</div>
@@ -1953,21 +1977,21 @@ update();
                 <button class="btn btn-secondary" style="width:100%;justify-content:center;" onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')">Request Early Access</button>
         </div>
         <div class="pricing-card featured">
-          <span class="pricing-badge">Most Popular</span>
-          <div class="pricing-name" style="color:white;">Radiologist Pro</div>
-          <div class="pricing-desc">For individual radiologiss and small practices</div>
+          <!-- <span class="pricing-badge">Most Popular</span> -->
+          <div class="pricing-name" style="color:white;">Pro</div>
+          <div class="pricing-desc">For individual radiologists and small practices</div>
           <div class="pricing-price">
             <!-- <div class="pricing-amount" style="color:var(--brand-teal);">$299</div> -->
-            <div class="pricing-period">per radiologist / month</div>
+            <!-- <div class="pricing-period">per radiologist / month</div> -->
           </div>
           <hr class="pricing-divider">
           <div class="pricing-features">
             <div class="pricing-feature"><span class="pricing-check">✓</span> Unlimited studies</div>
-            <div class="pricing-feature"><span class="pricing-check">✓</span> All modalities (CT, MRI)</div>
-            <div class="pricing-feature"><span class="pricing-check">✓</span> Auto-report generation</div>
-            <div class="pricing-feature"><span class="pricing-check">✓</span> Critical result alerting</div>
-            <div class="pricing-feature"><span class="pricing-check">✓</span> PACS integration</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> All modalities</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> Longitudinal comparison</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Priority support</div>
+            <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> PACS integration</div> -->
+            <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> Longitudinal comparison</div> -->
           </div>
 <button 
   class="btn btn-accent" 
@@ -1977,17 +2001,17 @@ update();
   Request Access
 </button>        
 </div>
-        <div class="pricing-card">
+        <div class="pricing-card featured">
           <div class="pricing-name">Department</div>
-          <div class="pricing-desc">For hospital radiology departments</div>
+          <div class="pricing-desc">For hospital radiology departments and health systems.</div>
           <div class="pricing-price">
-            <div class="pricing-amount">Custom</div>
-            <div class="pricing-period">Volume pricing available</div>
+            <!-- <div class="pricing-amount">Custom</div> -->
+            <!-- <div class="pricing-period">Volume pricing available</div> -->
           </div>
           <hr class="pricing-divider">
           <div class="pricing-features">
             <div class="pricing-feature"><span class="pricing-check">✓</span> Everything in Pro</div>
-            <div class="pricing-feature"><span class="pricing-check">✓</span> On-premise deployment option</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> On-premise deployment</div>
             <div class="pricing-feature"><span class="pricing-check">✓</span> HL7 FHIR integration</div>
             <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> Custom AI model fine-tuning</div> -->
             <!-- <div class="pricing-feature"><span class="pricing-check">✓</span> Dedicated Rad AI specialist</div> -->
@@ -2040,12 +2064,12 @@ update();
         </div>
         <div class="card" style="padding:20px 24px;">
           <h4 style="margin-bottom:8px;">How does EHR integration work?</h4>
-          <p class="body-sm" style="color:var(--text-secondary);">We integrate via certified FHIR APIs and EHR App Marketplace listings (Epic App Orchard, Cerner App Market). Setup typically takes under 48 hours with our integration team's support.</p>
+          <p class="body-sm" style="color:var(--text-secondary);">We integrate via certified FHIR APIs and EHR App Marketplace listings. Setup typically takes under 48 hours with our integration team's support.</p>
         </div>
-        <div class="card" style="padding:20px 24px;">
+        <!-- <div class="card" style="padding:20px 24px;">
           <h4 style="margin-bottom:8px;">Is patient data stored on Arogya servers?</h4>
           <p class="body-sm" style="color:var(--text-secondary);">Audio is processed transiently and not stored. Note content is retained only in your EHR or on our HIPAA-compliant, SOC 2 certified infrastructure — never used for model training without explicit consent.</p>
-        </div>
+        </div> -->
         <div class="card" style="padding:20px 24px;">
           <h4 style="margin-bottom:8px;">Can I cancel anytime?</h4>
           <p class="body-sm" style="color:var(--text-secondary);">Yes. Monthly plans can be cancelled at any time. Annual plans are refundable on a pro-rated basis within the first 90 days.</p>
@@ -2412,8 +2436,8 @@ update();
   <div class="modal" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeSignup()" aria-label="Close modal">✕</button>
     <span class="modal-plan-badge" id="modalPlanBadge">Free Trial</span>
-    <h2 class="heading-2" id="modalTitle" style="margin-bottom:6px;">Start your free trial</h2>
-    <p class="body-sm" style="color:var(--text-secondary);margin-bottom:28px;">30 days full access. No credit card required.</p>
+  <h2 class="heading-2" id="modalTitle" style="margin-bottom:6px;">Request Early Access</h2>
+    <!-- <p class="body-sm" style="color:var(--text-secondary);margin-bottom:28px;">30 days full access. No credit card required.</p> -->
 
     <div class="input-group">
       <label class="input-label" for="signupFirst">First Name</label>
@@ -2443,7 +2467,7 @@ update();
       </select>
     </div>
     <button class="btn btn-accent" style="width:100%;justify-content:center;font-size:1rem;padding:14px;" onclick="submitSignup()">
-      Create Free Account →
+      Request Early Access →
     </button>
     <p style="color:var(--text-muted);font-size:.75rem;text-align:center;margin-top:12px;">
       By signing up you agree to our <a href="#" style="color:var(--brand-royal);">Terms</a> and <a href="#" style="color:var(--brand-royal);">Privacy Policy</a>
