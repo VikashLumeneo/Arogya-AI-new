@@ -956,14 +956,21 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
   <!-- <div class="mobile-nav-link" onclick="navigate('resources')">Resources</div> -->
   <!-- <div class="mobile-nav-link" onclick="navigate('about')">About</div> -->
   <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
-    <span class="btn btn-secondary" onclick="openSignup('Free Trial');closeMobileNav()" style="cursor:pointer;flex:1;justify-content:center">Log In</span>
-   <span 
-  class="btn btn-accent btn-sm nav-cta-desktop" 
-  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')" 
-  style="cursor:pointer"
+    <span 
+  class="btn btn-secondary" 
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer'); closeMobileNav()" 
+  style="cursor:pointer;flex:1;justify-content:center"
+>
+  Log In
+</span>
+   <a 
+  href="https://dev.arogyalabs.ai/signup?trial=true"
+  class="btn btn-accent"
+  style="width:100%;text-align:center;"
+  onclick="closeMobileNav()"
 >
   Start Free
-</span>
+</a>
   </div>
 </div>
 
