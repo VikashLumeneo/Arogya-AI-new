@@ -1150,7 +1150,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
   </section>
 
   <!-- STATS STRIP -->
-  <section class="stats-strip" aria-label="Platform statistics">
+  <!-- <section class="stats-strip" aria-label="Platform statistics">
     <div class="container">
       <div class="stats-grid">
         <div class="text-center">
@@ -1171,7 +1171,7 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- PRODUCTS OVERVIEW -->
   <section class="section" aria-label="Products">
@@ -1202,7 +1202,13 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
               <!-- <li>20+ specialty templates</li> -->
             </ul>
             <div style="margin-top:24px;">
-              <span class="btn btn-primary" style="width:100%;justify-content:center;cursor:pointer">Start Free Trial →</span>
+<span 
+  class="btn btn-primary" 
+  style="width:100%;justify-content:center;cursor:pointer"
+  onclick="window.open('https://dev.arogyalabs.ai/signup?trial=true', '_blank', 'noopener,noreferrer')"
+>
+  Start Free Trial →
+</span>
             </div>
           </div>
         </div>
@@ -1224,8 +1230,13 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
               <!-- <li>Peer-review workflow</li> -->
             </ul>
             <div style="margin-top:24px;">
-              <span class="btn btn-primary" style="width:100%;justify-content:center;cursor:pointer">Request Access →</span>
-            </div>
+<span 
+  class="btn btn-primary" 
+  style="width:100%;justify-content:center;cursor:pointer"
+  onclick="openSignup('AI Radiologist')"
+>
+  Request Access →
+</span>            </div>
           </div>
         </div>
 
@@ -1246,8 +1257,12 @@ dropdown.querySelectorAll(".nav-dropdown-item").forEach(item => {
               <li>Patient medication counseling</li>
             </ul>
             <div style="margin-top:24px;">
-              <span class="btn btn-secondary" style="width:100%;justify-content:center;cursor:pointer">Join Waitlist</span>
-            </div>
+<span 
+  class="btn btn-secondary disabled-btn" 
+  style="width:100%;justify-content:center;"
+>
+  Join Waitlist
+</span>            </div>
           </div>
         </div>
       </div>
