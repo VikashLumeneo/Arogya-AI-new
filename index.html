@@ -822,7 +822,19 @@ footer {
    ============================================================ */
 .logo-svg { width: 36px; height: 36px; }
 
+#page-scribe .scribe-workflow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
 
+@media (max-width: 768px) {
+  #page-scribe .scribe-workflow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1237,6 +1249,7 @@ footer {
   <section class="product-hero">
     <div class="hero-grid-bg"></div>
     <div class="container">
+      <div class="hero-split">
       <div class="product-hero-content">
         <span class="product-badge badge-live" style="margin-bottom:20px;display:inline-block;">✦ Available Now · Free Trial</span>
         <!-- <div style="font-size:3.5rem;margin-bottom:16px;">🎤</div> -->
@@ -1259,6 +1272,7 @@ footer {
           <div class="hero-trust-item"><span class="hero-trust-icon">✓</span> EHR Integration</div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -1297,7 +1311,7 @@ footer {
   <!-- Workflow -->
   <section class="section bg-secondary-section">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+      <div class="scribe-workflow">
         <div>
           <div class="section-eyebrow" style="text-align:left;margin-left:0;"> Workflow</div>
           <h2 class="heading-1" style="margin-top:12px;">How Scribe works in your day</h2>
