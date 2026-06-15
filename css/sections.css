@@ -1538,18 +1538,32 @@
     max-width:700px;
     margin:14px auto 0;
 }
-
-.pricing-hero .chip{
-    background:rgba(255,255,255,0.08);
-    color:#fff;
-    border:1px solid rgba(255,255,255,0.15);
+.product-hero .chip-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    width:100%;
+    margin-top:32px;
+}
+.product-hero .chip{
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.15);
 }
 
-.pricing-hero .chip.active{
-    background:#F2572B;
-    color:#fff;
-    border-color:#F2572B;
+.product-hero .chip.active{
+    background: #F2572B;
+    border-color: #F2572B;
+    color: #fff;
 }
+
+.product-hero .chip:hover{
+    background: rgba(255,255,255,.14);
+    color: #fff;
+}
+
 
 @media (max-width:768px){
     .pricing-hero{
