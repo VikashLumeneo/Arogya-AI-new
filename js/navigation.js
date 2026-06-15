@@ -27,13 +27,15 @@ function navigate(page, pushHistory = true) {
   const previousPage = currentPage;
   currentPage = page;
 
-  if (pushHistory) {
-    if (page !== previousPage) {
-      const url = page === 'home'
-        ? window.location.pathname + window.location.search
-        : '#' + page;
-      history.pushState({ page }, '', url);
-    } else if (page === 'home' && location.hash) {
+ if (pushHistory) {
+  if (page !== previousPage) {
+    const url = page === 'home'
+      ? '/'
+      : '/' + page;
+
+    history.pushState({ page }, '', url);
+  }
+ else if (page === 'home' && location.hash) {
       // Already on home — strip leftover #home without adding a history entry
       history.replaceState({ page: 'home' }, '', window.location.pathname + window.location.search);
     }
@@ -47,21 +49,16 @@ window.addEventListener('scroll', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const page = location.pathname.replace('/', '') || 'home';
 
-  // Always start from Overview/Home
-  navigate('home', false);
-
-  // Remove any leftover hash
-  if (location.hash) {
-    history.replaceState(
-      { page: 'home' },
-      '',
-      location.pathname + location.search
-    );
+  if (pages.includes(page)) {
+    navigate(page, false);
+  } else {
+    navigate('home', false);
   }
 });
 
 window.addEventListener('popstate', () => {
-  const page = location.hash.replace('#', '') || 'home';
+  const page = location.pathname.replace('/', '') || 'home';
   navigate(page, false);
 });
